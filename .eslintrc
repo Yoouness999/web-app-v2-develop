@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true,
+      "spread": true,
+      "restParams": true,
+      "experimentalObjectRestSpread": true
+    },
+  },
+  "rules": {
+    "no-console": 0,
+    "no-unused-vars": 0,
+    "no-undef": 0
+  }
+}

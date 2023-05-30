@@ -1,0 +1,163 @@
+/* ======================================================
+ * Forms
+ * =====================================================*/
+form {
+    display: block;
+}
+
+textarea {
+    max-width: 100%;
+    min-height: 120px;
+}
+
+label {
+    font-weight: normal;
+
+    &[data-toggle="modal"] {
+        cursor: help;
+    }
+}
+
+select {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.input-group {
+    .form-control {
+        max-height: 45px;
+
+        + .input-group-btn {
+            .btn {
+                border-bottom-left-radius: 0;
+                border-top-left-radius: 0;
+            }
+
+            span.btn {
+                cursor: default;
+            }
+        }
+    }
+
+    @media (max-width: $screen-xs-max) {
+        &,
+        .form-control,
+        .input-group-btn,
+        .input-group-btn .btn {
+            display: block;
+            float: none;
+            width: 100%;
+        }
+
+        .form-control,
+        .input-group-btn .btn {
+            border-radius: 4px !important;
+        }
+
+        .form-control {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+    }
+    @media (min-width: $screen-sm-min) {}
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}
+
+.form-group, .input-group {
+    &.has-error {
+        .error {
+            color: $brand-danger;
+            font-size: .8em;
+        }
+        input, textarea, select {
+            &, &:focus {
+                border: 2px solid $brand-danger !important;
+            }
+        }
+    }
+
+    &.has-success {
+        input, textarea, select {
+            &, &:focus {
+                border: 2px solid $brand-success !important;
+            }
+        }
+    }
+}
+
+.form-control {
+    @include focus-ring($gray-light);
+    box-shadow: none;
+
+    &:focus {
+        border-color: $input-border !important;
+        @include box-shadow(none !important);
+    }
+
+    &.placeholder {
+        color: #aaa;
+    }
+}
+
+/* Form style
+---------------------------------------------- */
+.form-horizontal {
+    label {
+        padding-top: 10px;
+    }
+}
+
+/* Form specific
+---------------------------------------------- */
+.form-contact {
+    margin-top: 40px;
+}
+
+.card-type {
+    display: inline;
+    width: 54px;
+    padding: 6px 0;
+    opacity: 0.3;
+    transition: opacity 0.5s;
+}
+
+.card-type.selected {
+    opacity: 1;
+}
+
+/* Errors
+---------------------------------------------- */
+.form-error {
+    @extend .alert;
+    @extend .alert-danger;
+    text-align: left;
+}
+
+/**
+* Show error on form submit
+*/
+.ng-submitted {
+    .form-control.ng-invalid-required {
+        @extend .form-error;
+        margin-bottom: inherit;
+    }
+}
+
+/**
+* Show error if input is raped and still invalid
+*/
+.ng-touched.form-control {
+    &.ng-invalid-required,
+    &.ng-invalid {
+        @extend .form-error;
+        margin-bottom: inherit;
+    }
+}
+
+.input-invalid {
+    @extend .form-error;
+    margin-bottom: inherit;
+}
+

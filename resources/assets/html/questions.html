@@ -1,0 +1,145 @@
+<form class="form" id="formQuestions" method="post" novalidate>
+    <h4>{{ 'form.questions' | translate }}</h4>
+
+    <section class="services-section">
+        <div class="questions">
+            <div class="question" data-id="{{ item.id }}" data-slug="{{ item.slug }}" data-type="{{ item.type }}" ng-class="{'first': (key == 0)}" ng-repeat="(key, item) in ctrl.questions">
+                <p class="image">
+                    <img ng-src="{{ '/assets/img/order/services/questions/' + item.slug + '.svg' }}" alt="" />
+                </p>
+                <p class="content">
+                    {{ 'services.questions.' + item.slug | translate }}
+
+                    <span class="answer-number" ng-if="item.type == 'number'">
+                        <span class="increment-wrapper">
+                            <input type="text" ng-model="ctrl.answers[item.type][item.id]"
+                                   name="{{ 'answers[' + item.type + '][' + item.id + ']' }}"
+                                   data-id="{{ item.id }}"
+                                   data-question-type="{{ item.type }}"
+                                   ng-keyup="ctrl.onAnswerChange($event, {
+                                        'id': item.id,
+                                        'questionType': item.type,
+                                   })"
+                            >
+                            <span class="increment-buttons">
+                                <button class="increment-add" type="button"
+                                        ng-click="ctrl.onAnswerChange($event, {
+                                            'id': item.id,
+                                            'questionType': item.type,
+                                            'increment': 'add',
+                                        })"
+                                >+</button>
+                                <button class="increment-remove" type="button"
+                                        ng-click="ctrl.onAnswerChange($event, {
+                                            'id': item.id,
+                                            'questionType': item.type,
+                                            'increment': 'remove',
+                                        })"
+                                >-</button>
+                            </span>
+                        </span>
+
+                        <input type="hidden" ng-repeat="(key, answer) in item.answers"
+                               name="{{ 'targets[' + answer.id + ']' }}"
+                               ng-value="answer.target"
+                               data-id="{{ answer.id }}"
+                               data-value-number-from="{{ answer.value_number_from }}"
+                               data-value-number-to="{{ answer.value_number_to }}"
+                               data-appointment="{{ answer.appointment }}"
+                               data-floor-value="{{ answer.floor_value }}"
+                               data-label="{{ 'services.' + answer.slug | translate }}"
+                        >
+                    </span>
+                </p>
+
+                <input type="radio" value="yes" ng-if="item.type == 'boolean'"
+                       name="{{ 'answers[' + item.type + '][' + item.id + ']' }}"
+                       id="{{ 'question-' + item.slug + '-answer-yes' }}"
+                       data-id="{{ item.id }}"
+                       data-question-type="{{ item.type }}"
+                       ng-checked="ctrl.answers[item.type][item.id] == 'yes'"
+                       ng-model="ctrl.answers[item.type][item.id]" ng-value="'yes'"
+                >
+                <label class="answer-boolean anwser-yes" for="{{ 'question-' + item.slug + '-answer-yes' }}" ng-if="item.type == 'boolean'"
+                       ng-class="{'active': ctrl.answers[item.type][item.id] == 'yes'}"
+                       ng-click="ctrl.onAnswerChange($event, {
+                           'id': item.id,
+                           'questionType': item.type,
+                           'questionValue': 'yes'
+                       })"
+                >
+                    {{ 'services.answers.yes' | translate }}
+                </label>
+                <span class="answer-list-yes hide" ng-if="item.type == 'boolean'">
+                    <span ng-repeat="(key, answer) in item.answers">
+                        <input type="hidden" ng-if="answer.value_boolean == 1"
+                                name="{{ 'targets[' + answer.id + ']' }}"
+                                ng-value="answer.target"
+                                data-id="{{ answer.id }}"
+                                data-value-number-from="{{ answer.value_number_from }}"
+                                data-value-number-to="{{ answer.value_number_to }}"
+                                data-appointment="{{ answer.appointment }}"
+                                data-floor-value="{{ answer.floor_value }}"
+                                data-label="{{ 'services.' + answer.slug | translate }}"
+                        >
+                    </span>
+                </span>
+
+                <input type="radio" value="no" ng-if="item.type == 'boolean'"
+                       name="{{ 'answers[' + item.type + '][' + item.id + ']' }}"
+                       id="{{ 'question-' + item.slug + '-answer-no' }}"
+                       data-id="{{ item.id }}"
+                       data-question-type="{{ item.type }}"
+                       ng-checked="ctrl.answers[item.type][item.id] == 'no'"
+                       ng-model="ctrl.answers[item.type][item.id]" ng-value="'no'"
+                >
+                <label class="answer-boolean anwser-no" for="{{ 'question-' + item.slug + '-answer-no' }}" ng-if="item.type == 'boolean'"
+                       ng-class="{'active': ctrl.answers[item.type][item.id] == 'no'}"
+                       ng-click="ctrl.onAnswerChange($event, {
+                           'id': item.id,
+                           'questionType': item.type,
+                           'questionValue': 'no'
+                       })"
+                >
+                    {{ 'services.answers.no' | translate }}
+                </label>
+                <span class="answer-list-no hide" ng-if="item.type == 'boolean'">
+                    <span ng-repeat="(key, answer) in item.answers">
+                        <input type="hidden" ng-if="answer.value_boolean == 0"
+                                name="{{ 'targets[' + answer.id + ']' }}"
+                                ng-value="answer.target"
+                                data-id="{{ answer.id }}"
+                                data-value-number-from="{{ answer.value_number_from }}"
+                                data-value-number-to="{{ answer.value_number_to }}"
+                                data-appointment="{{ answer.appointment }}"
+                                data-floor-value="{{ answer.floor_value }}"
+                                data-label="{{ 'services.' + answer.slug | translate }}"
+                        >
+                    </span>
+                </span>
+            </div>
+        </div>
+    </section>
+    <!-- /.services-section -->
+
+    <button class="btn btn-primary" type="button" ng-click="ctrl.onSubmit()">
+        {{ 'services.buttons.submit_answers' | translate }}
+    </button>
+    <button class="btn btn-link" type="button" ng-click="ctrl.onCancel()">
+        {{ 'form.button_cancel' | translate }}
+    </button>
+
+    <div ng-show="ctrl.formSuccess">
+        <div class="divider divider--hidden"></div>
+        <div class="alert alert-success">{{ 'form.thank_you' | translate }}</div>
+    </div>
+
+    <div ng-show="ctrl.formErrors">
+        <div class="divider divider--hidden"></div>
+        <div class="alert alert-warning">
+            <ul>
+                <li ng-repeat="(key, item) in ctrl.formErrors">{{ item }}</li>
+            </ul>
+        </div>
+    </div>
+</form>

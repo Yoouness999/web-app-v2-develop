@@ -1,0 +1,159 @@
+/* ======================================================
+*  Manager
+*  =====================================================*/
+
+.tpl-user-manager {
+    .page-banner-content {
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    }
+
+    .btn-close {
+        cursor: pointer;
+        color: $brand-primary;
+    }
+}
+
+.manager-search {
+    margin-top: 20px;
+
+    @media (max-width: $screen-xs-max) {
+        input, select {
+            margin-bottom: 10px;
+        }
+    }
+    @media (min-width: $screen-sm-min) {}
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}
+
+.manager-thead {
+    @include clearfix;
+    line-height: 46px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    h4 {
+        color: $brand-primary;
+        float: left;
+        font-size: 1em;
+        line-height: 46px;
+        margin-bottom: 0;
+        margin-right: 35px;
+    }
+
+    .checkbox {
+        margin-left: 15px;
+
+        input[type=checkbox] {
+            & + label:after,
+            & + label:before {
+                top: 4px;
+            }
+        }
+    }
+
+    @media (max-width: $screen-xs-max) {
+        .btn {
+            display: block;
+            width: 100%;
+        }
+    }
+    @media (min-width: $screen-sm-min) {}
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}
+
+/* Card box
+---------------------------------------------- */
+.card-box {
+    border: 1px solid $gray-light;
+    background-color: #fff;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 3px;
+    cursor: pointer;
+    display: table;
+    width: 100%;
+
+    /*&:after {
+        background-color: rgba(0, 0, 0, .05);
+        bottom: -4px;
+        border-radius: 4px;
+        content: '';
+        height: 3px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }*/
+
+    &__selectarea {
+        border-right: 1px solid $gray-light;
+        display: table-cell;
+        position: relative;
+        text-align: center;
+        vertical-align: middle;
+        width: 50px;
+
+        .checkbox {
+            display: inline-block;
+            height: 20px;
+
+            label {
+                min-height: 0;
+            }
+
+            input[type="checkbox"] {
+                margin-left: 0;
+
+                + label {
+                    padding-left: 20px;
+                }
+            }
+
+        }
+    }
+
+    &__content {
+        @include clearfix();
+        display: table-cell;
+        vertical-align: middle;
+
+        &__visual {
+            display: block;
+            float: left;
+            padding: 10px;
+            width: 120px;
+
+            img {
+                width: 117px !important;
+            }
+        }
+
+        &__description {
+            display: block;
+            margin: 1em 0;
+            width: 100%;
+        }
+    }
+
+    &.selected {
+        background: url("../img/bg-checked.png") repeat-y top left;
+    }
+
+    @media (max-width: $screen-sm-max) {
+        &__content {
+
+            &__description {
+                padding-left: 15px;
+            }
+
+        }
+    }
+}

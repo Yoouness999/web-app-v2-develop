@@ -1,0 +1,15 @@
+{
+    "name": "Filemanager",
+    "alias": "filemanager",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Filemanager\\Providers\\FilemanagerServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

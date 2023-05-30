@@ -1,0 +1,102 @@
+.tpl-order-storage .main-content,
+.tpl-order-services .main-content,
+.tpl-order-appointment .main-content,
+.tpl-order-billing .main-content,
+.tpl-order-review .main-content {
+    padding-top: 160px;
+}
+
+.section-breadcrumb {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    padding: 23px 0 22px;
+    background: $brand-primary;
+    color: #fff;
+    z-index: 1010;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+
+        li {
+            display: table-cell;
+            float: none;
+            font-size: 22px;
+            font-weight: 500;
+            text-align: left;
+            vertical-align: middle;
+            width: 1%;
+
+            &.active {
+                span.number {
+                    background: #fff;
+                    color: $brand-primary;
+                }
+            }
+
+            span.number {
+                border: 2px solid #fff;
+                border-radius: 35px;
+                display: inline-block;
+                height: 35px;
+                line-height: 32px;
+                margin-right: 15px;
+                text-align: center;
+                vertical-align: middle;
+                width: 35px;
+            }
+        }
+    }
+
+    @media (max-width: $screen-xs-max) {
+        ul {
+            li {
+                display: none;
+
+                &.active {
+                    display: inline-block;
+                    width: auto;
+                }
+            }
+        }
+    }
+    @media (min-width: $screen-sm-min) {
+        ul {
+            li {
+                font-size: 14px;
+
+                span {
+                    margin-right: 5px;
+
+                    &.number {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+    @media (min-width: $screen-md-min) {
+        ul {
+            li {
+                font-size: 18px;
+            }
+        }
+    }
+    @media (min-width: $screen-lg-min) {
+        ul {
+            li {
+                font-size: 22px;
+
+                span {
+                    &.number {
+                        margin-right: 25px;
+                    }
+                }
+            }
+        }
+    }
+}

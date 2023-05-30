@@ -1,0 +1,131 @@
+////
+/// Questions module (cfr. /order/services)
+////
+
+.questions {
+    margin-bottom: 20px;
+
+    .question {
+        display: none;
+        table-layout: fixed;
+        //width: 780px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #b7b7b7;
+        background: #fff;
+        width: 100%;
+
+        &.active {
+            display: table;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &.first {
+            display: table;
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        > p,
+        > label {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 32px 0;
+        }
+
+        .answer-boolean {
+            width: 73px;
+            margin: 0;
+            border-left: 1px solid #b7b7b7;
+            color: $text-color;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .answer-boolean:hover,
+        input[name^="answers"]:checked + .answer-boolean,
+        .answer-boolean.active {
+            background: $brand-primary;
+            color: #fff;
+        }
+
+        .answer-number {
+            display: block;
+            margin: 13px 0 0;
+        }
+
+        .image {
+            width: 200px;
+
+            @media screen and (max-width: $screen-xs-max) {
+                display: none;
+            }
+
+            img {
+                margin: auto;
+            }
+        }
+
+        .content {
+            padding-right: 21px;
+            color: $text-color;
+            text-align: left;
+
+            > span,
+            > em {
+                display: block;
+                font-size: .8em;
+            }
+        }
+
+        @media screen and (max-width: $screen-xs-max) {
+            @include clearfix;
+            width: 100%;
+
+            > p,
+            > label {
+                display: block;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .answer-boolean {
+                &:first-of-type {
+                    border-left: 0;
+                }
+
+                float: left;
+                width: 50%;
+                border-top: 1px solid #b7b7b7;
+            }
+
+            .answer-number {
+                text-align: center;
+
+                .increment-wrapper {
+                    input {
+                        width: 40px;
+                    }
+
+                    .increment-buttons {
+                        button {
+                            width: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

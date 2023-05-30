@@ -1,0 +1,15 @@
+{
+    "name": "BoxifyManager",
+    "alias": "boxifymanager",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\BoxifyManager\\Providers\\BoxifyManagerServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

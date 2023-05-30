@@ -1,0 +1,68 @@
+/* ======================================================
+*  Landing
+*  =====================================================*/
+
+.tpl-landing{
+
+    .navbar{
+        background: transparent;
+    }
+
+    position: relative;
+
+    .landing-holder{
+        height: 300px;
+        top: 50%;
+        position: absolute;
+        margin: -150px 0 0 -258px;
+        width: 516px;
+        left: 50%;
+        text-align: center;
+        color: #FFF;
+
+        // animation
+        @include animate-prefixer(animation-delay, .6s);
+        @extend .fadeIn;
+        @extend .animated;
+
+        @media (max-width: $screen-xs-max) {
+            height: 300px;
+            top: 50%;
+            position: absolute;
+            margin: -150px 0 0 -150px;
+            width: 300px;
+            left: 50%;
+        }
+
+        h3{
+            padding: 0 0 1em;
+        }
+
+        input{
+            font-size:18px;
+            height: 50px;
+            padding: 1em;
+            color: #4D4D4D;
+            border: none;
+        }
+
+        button{
+            font-weight: 700;
+            font-size: 18px;
+            height: 50px;
+            background: #cb003c;
+            color: #FFF;
+            width: 150px;
+            border: none;
+
+            &:hover{
+                opacity: 0.8;
+            }
+
+            @media (max-width: $screen-xs-max) {
+                width: 100px;
+            }
+        }
+
+    }
+}

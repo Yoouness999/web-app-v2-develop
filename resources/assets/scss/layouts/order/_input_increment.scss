@@ -1,0 +1,80 @@
+.increment-wrapper {
+    border: 1px solid #b7b7b7;
+    border-radius: 3px;
+    display: inline-block;
+    vertical-align: bottom;
+
+    .form-control-static {
+        min-height: 0;
+        padding: 0;
+    }
+
+    input, .form-control-static {
+        border: 0;
+        border-bottom-left-radius: 3px;
+        border-top-left-radius: 3px;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        color: #b7b7b7;
+        display: inline-block;
+        font-size: 22px;
+        font-weight: 300;
+        height: 33px;
+        line-height: 33px;
+        padding: 0;
+        text-align: center;
+        width: 29px;
+
+        &.active {
+            background: $brand-primary;
+            color: #fff;
+        }
+    }
+}
+
+.increment-buttons {
+    border-left: 1px solid #b7b7b7;
+    display: inline-block;
+    float: right;
+    vertical-align: top;
+
+    button {
+        border: 0;
+        border-bottom: 1px solid #b7b7b7;
+        background: none;
+        color: #b7b7b7;
+        display: block;
+        font-size: 10px;
+        font-weight: 500;
+        height: 17px;
+        line-height: 15px;
+        padding: 0;
+        text-align: center;
+        width: 13px;
+
+        &:hover {
+            background: $brand-primary;
+            color: #fff;
+        }
+
+        &:last-child {
+            border: 0;
+            height: 16px;
+            line-height: 15px;
+        }
+    }
+}
+
+span.increment-wrapper + label {
+    color: $text-color;
+    font-size: 18px;
+    font-weight: 300;
+    hyphens: auto;
+    margin: 0 0 0 9px;
+    word-break: break-all;
+}
+
+.increment-wrapper + label svg {
+    display: inline-block;
+    vertical-align: bottom;
+}

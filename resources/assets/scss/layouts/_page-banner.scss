@@ -1,0 +1,71 @@
+/* ======================================================
+*  Page banner
+*  =====================================================*/
+
+.page-banner {
+	@include bg-full;
+	min-height: 300px;
+	position: relative;
+
+    .background-banner {
+        @include bg-full;
+        min-height: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+
+        &.mobile {
+            display: none;
+
+            @media (max-width: $screen-sm-min) {
+                display: block;
+            }
+        }
+
+        &.desktop {
+            display: none;
+
+            @media (min-width: $screen-sm-min) {
+                display: block;
+            }
+        }
+    }
+}
+
+.page-banner-lg {
+	min-height: 680px;
+
+	.page-banner-content {
+		top: 300px;
+	}
+}
+
+.page-banner-sm {
+	min-height: 190px;
+
+	.page-banner-content {
+		top: 100px;
+	}
+}
+
+.page-banner-content {
+	@extend .text-center;
+	@include translate(0, -50%);
+	color: #fff;
+	position: relative;
+	top: 150px;
+
+	h1 {
+		margin: 0 0 5px;
+	}
+
+	h2 {
+		width: 512px;
+		margin: 0 auto 25px;
+		font-size: 26px;
+		font-weight: 300;
+	}
+}

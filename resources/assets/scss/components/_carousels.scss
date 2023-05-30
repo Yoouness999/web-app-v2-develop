@@ -1,0 +1,163 @@
+
+.carousel-plans {
+    .owl-controls {
+        .owl-buttons {
+            div {
+                &.owl-next,
+                &.owl-prev {
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                    bottom: 0;
+                    height: 100%;
+                    opacity: .7;
+                    top: 0;
+
+                    &:focus, &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    .carousel-nav {
+        background: #e6e6e6;
+        border-radius: 23px;
+        display: inline-block;
+        margin: 0 auto 55px;
+        text-align: center;
+
+        .owl-item {
+            .item {
+                border: 0;
+                border-radius: 23px;
+                color: $text-color;
+                font-size: 22px;
+                height: 43px;
+                line-height: 43px;
+                margin: 0;
+                text-indent: 0;
+
+                &.active {
+                    background: #fff;
+                }
+            }
+        }
+
+        .owl-controls {
+            .owl-buttons {
+                div {
+                    &.owl-next,
+                    &.owl-prev {
+                        font-size: 30px;
+                        line-height: 44px;
+                        width: 40px;
+                    }
+
+                    &.owl-next {
+                        right: 0;
+                    }
+
+                    &.owl-prev {
+                        left: 0;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: $screen-xs-max) {}
+        @media (min-width: $screen-sm-min) {
+            width: 500px;
+
+            .owl-controls {
+                display: none !important;
+            }
+
+            .owl-item {
+                width: 125px !important;
+            }
+        }
+        @media (min-width: $screen-md-min) {}
+        @media (min-width: $screen-lg-min) {}
+    }
+
+
+    .carousel-content {
+        margin: 0 auto;
+        max-width: 300px !important;
+
+        .owl-controls {
+            .owl-buttons {
+                div {
+                    &.owl-next,
+                    &.owl-prev {
+                        width: 60px;
+                    }
+
+                    &.owl-next {
+                        background-image: url(../img/order/storage/picto-arrow-right.png);
+                        right: -60px;
+                    }
+
+                    &.owl-prev {
+                        background-image: url(../img/order/storage/picto-arrow-left.png);
+                        left: -60px;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: $screen-xs-max) {
+            .owl-controls {
+                .owl-buttons {
+                    div {
+                        &.owl-next,
+                        &.owl-prev {
+                            background-size: contain;
+                            width: 20px;
+                        }
+
+                        &.owl-next {
+                            right: -10px;
+                        }
+
+                        &.owl-prev {
+                            left: -10px;
+                        }
+                    }
+                }
+            }
+        }
+        @media (min-width: $screen-sm-min) {
+            max-width: none !important;
+        }
+        @media (min-width: $screen-md-min) {}
+        @media (min-width: $screen-lg-min) {}
+    }
+}
+
+.carousel-partners {
+    .owl-item {
+        .item {
+            display: table;
+            height: 150px;
+
+            a {
+                display: table-cell;
+                padding: 15px;
+                vertical-align: middle;
+
+                &:focus, &:hover {
+                    img {
+                        filter: grayscale(0%);
+                    }
+                }
+
+                img {
+                    filter: grayscale(100%);
+                    @include transition(all 200ms ease-in-out);
+                }
+            }
+        }
+    }
+}

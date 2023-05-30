@@ -1,0 +1,47 @@
+[class^="tpl-order"] {
+    .form-group, .input-group {
+        &.has-error {
+            .form-control {
+                background-color: $state-danger-bg;
+                border: 2px solid $state-danger-border;
+                color: $state-danger-text;
+            }
+        }
+    }
+
+    .intl-tel-input {
+        .flag-container {
+            display: none !important;
+        }
+    }
+
+    .form-control {
+        border-color: #b7b7b7;
+        border-radius: 5px;
+    }
+
+    label {
+        color: $text-color;
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    .input-group-btn {
+        vertical-align: top;
+
+        .glyphicon {
+            top: 4px;
+        }
+
+        .btn {
+            @extend .btn;
+            @extend .btn-primary;
+            padding: 10px 20px;
+        }
+    }
+
+    .input-group .form-control:first-child {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+}

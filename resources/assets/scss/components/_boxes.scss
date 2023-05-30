@@ -1,0 +1,72 @@
+/**
+* Boxes
+*/
+.box-input{
+	border: 1px solid $gray-light;
+	border-radius: 5px;
+	padding: 0 !important;
+	margin: 0;
+
+	&__thumb {
+		float: left;
+		text-align: center;
+		padding: 12px;
+		width: 72px;
+		height: 72px;
+	}
+
+	&__content{
+		float: left;
+		vertical-align: middle;
+		height: 72px;
+		font-weight: bold;
+		font-size: 14px;
+		overflow: hidden;
+		padding-top: 12px;
+		color: $brand-primary;
+		div{
+			font-weight: normal;
+			color: $gray-dark;
+		}
+	}
+
+	&__increment{
+		float: right;
+		width: 28px;
+		height: 72px;
+		a.btn {
+
+			border-radius: 0;
+			border:1px solid $gray-light;
+			border-bottom: none;
+			border-top: none;
+			height: 36px;
+			margin: 0;
+			padding: 6px 0 0;
+
+			&:first-child{
+				border: 1px solid $gray-light;
+				border-top: none;
+			}
+		}
+	}
+
+	&__input input{
+		float: right;
+		border: none;
+		height: 70px;
+		width: 72px;
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		&:hover{
+			outline: none;
+		}
+	}
+
+	&__extra{
+		clear: both;
+		border-top: 1px solid $gray-light;
+		padding: 1em;
+	}
+}

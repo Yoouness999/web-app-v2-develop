@@ -1,0 +1,107 @@
+@mixin radio-variant($text-color: $input-color, $border-color: $input-border, $background-color: $input-bg) {
+    input[type="radio"] {
+        cursor: pointer;
+        visibility: hidden;
+
+        + label {
+            padding-left: 25px;
+
+            &:after {
+                background-color: $background-color;
+                border-radius: 50%;
+                color: $text-color;
+                content: '';
+                display: inline-block;
+                height: 11px;
+                left: 0;
+                top: 0;
+                margin-left: 3px;
+                margin-top: 3px;
+                padding-left: 3px;
+                padding-top: 1px;
+                position: absolute;
+                @include scale(0, 0);
+                @include transition-transform(.1s cubic-bezier(.8, -0.33, .2, 1.33));
+                visibility: visible;
+                width: 11px;
+            }
+
+            &:before {
+                background-color: $background-color;
+                border: 1px solid darken($border-color, 5%);
+                border-radius: 50%;
+                content: '';
+                display: inline-block;
+                height: 17px;
+                left: 0;
+                top: 0;
+                margin-left: 0;
+                position: absolute;
+                @include transition(border 0.15s ease-in-out);
+                visibility: visible;
+                width: 17px;
+            }
+        }
+
+        &:focus {
+            + label {
+                &:before {
+                    border-color: darken($border-color, 15%);
+                    @include box-shadow(none);
+                }
+            }
+        }
+
+        &:hover {
+            + label {
+                &:before {
+                    background-color: darken($background-color, 10%);
+                }
+            }
+        }
+
+        &:checked {
+            + label {
+                &:after {
+                    background-color: $text-color;
+                    @include scale(1, 1);
+                }
+            }
+        }
+
+        &:disabled {
+            + label {
+                &:after {
+                    background-color: lighten($text-color, 20%);
+                    cursor: not-allowed;
+                }
+                &:before {
+                    background-color: $input-bg-disabled;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
+
+.radio {
+    &.radio--inline {
+        display: inline-block;
+        margin-top: 0;
+
+        input[type="radio"] + label {
+            padding-left: 5px;
+        }
+    }
+
+    @include radio-variant();
+}
+
+.radio--justify {
+    display: table;
+    width: 100%;
+
+    .radio--inline {
+        display: table-cell;
+    }
+}

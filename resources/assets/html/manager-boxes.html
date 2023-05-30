@@ -1,0 +1,468 @@
+<!-- section-manager -->
+<div class="data-loading-wrapper" ng-if="manager.state != 'ready'">
+    <div class="data-loading"></div>
+</div>
+<section class="section section--manager">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="section__header">
+                <h1>{{ 'title' | translate }}</h1>
+
+                <div class="section__tools" ng-cloak ng-show="manager.plan && manager.storing_duration">
+                    <div class="section__tool">
+                        <span>{{ 'resume.plan' | translate }}</span>
+                        {{ manager.planVolume }}m³ - {{ 'resume.price' | translate:{price: manager.user.order_plan_price_per_month} }}
+                    </div>
+                    <div class="section__tool">
+                        <span>{{ 'resume.engagement' | translate }}</span>
+                        <div class="dropdown">
+                            <button type="button" data-toggle="dropdown">
+                                {{ 'storing_durations.' + manager.storing_duration | labels }} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="(key,item) in manager.storing_durations" ng-class="{'disabled': manager.isStoringDurationDisabled(item)}">
+                                    <a href="#" ng-click="manager.updateStoringDuration(item)">{{ 'storing_durations.' + item | labels }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="section__tool">
+                        <span>{{ 'resume.insurance' | translate }}</span>
+                        <div class="dropdown">
+                            <button type="button" data-toggle="dropdown">
+                                {{ 'insurances.' + manager.insurance | labels }} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-repeat="(key, item) in 'insurances' | labels" ng-class="{'disabled': manager.isInsuranceDisabled(key)}">
+                                    <a href="#" ng-click="manager.updateInsurance(key)">{{ item }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-9">
+                    <ul class="profile-nav" ng-cloak>
+                        <li ng-class="{'active': manager.type == 'in_storage'}">
+                            <a ng-click="manager.changeTab('in_storage')">
+                                {{ 'items.tabs.in_storage' | translate }} <span class="badge">{{ manager.itemsInStorage.length || 0 }}</span>
+                            </a>
+                        </li>
+                        <li ng-class="{'active': manager.type == 'in_transit'}">
+                            <a ng-click="manager.changeTab('in_transit')">
+                                {{ 'items.tabs.in_transit' | translate }} <span class="badge">{{ manager.itemsInTransit.length || 0 }}</span>
+                            </a>
+                        </li>
+                        <li ng-class="{'active': manager.type == 'with_me'}">
+                            <a ng-click="manager.changeTab('with_me')">
+                                {{ 'items.tabs.with_me' | translate }} <span class="badge">{{ manager.itemsWithMe.length || 0 }}</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="manager-search" ng-hide="manager.isScheduleMode || manager.isQuestionsMode">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="{{ 'filters.search' | translate }}" ng-model="query">
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="form-control" ng-class="{'placeholder': !order}" ng-model="order">
+                                    <option value="">{{ 'filters.sort_by' | translate }}</option>
+                                    <option ng-repeat="(value, label) in manager.filters.sorting" value="{{ value }}">{{ label }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-items" ng-hide="manager.isScheduleMode" ng-cloak>
+                <p class="alert alert-info mt-20" ng-hide="manager.itemsFiltered.length" translate="{{ 'items.no_items' }}"></p>
+                <div class="manager-thead" ng-show="manager.itemsFiltered.length">
+                    <h4>
+                        <span ng-if="manager.type == 'in_storage'">{{ 'items.title.in_storage' | translate }}</span>
+                        <span ng-if="manager.type == 'in_transit'">{{ 'items.title.in_transit' | translate }}</span>
+                        <span ng-if="manager.type == 'with_me'">{{ 'items.title.with_me' | translate }}</span>
+                    </h4>
+                    <div ng-show="manager.hasSelection">
+                        <div ng-if="manager.type == 'in_storage'">
+                            <button class="btn btn-primary" type="button" ng-click="manager.schedule()" ng-if="!manager.showCart">
+                                {{ 'items.has_selection.in_storage' | translate }}
+                            </button>
+                            <button class="btn btn-primary" type="button" ng-click="manager.toggleScheduleMode()" ng-if="manager.showCart">
+                                {{ 'items.has_selection.in_storage' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cards-container">
+                    <div class="pickup-card-container" ng-repeat="(key,pickup) in manager.pickups" ng-if="manager.type == 'in_transit'">
+                        <div class="card {{ 'card--' + pickup.status }}" ng-cloak>
+                            <div class="card__content">
+                                <div class="card__description">
+                                    <div class="card__selectarea" ng-if="pickup.type.indexOf('delivery') > -1">
+                                        <em class="fa fa-times" ng-click="manager.cancelSchedule(pickup)"></em>
+                                    </div>
+                                    <div class="card__selectarea second" ng-if="pickup.type.indexOf('delivery') > -1">
+                                        <em class="fa fa-pencil" ng-click="manager.schedule(pickup)"></em>
+                                    </div>
+                                    <div class="card__details">
+                                        <div class="card__number" ng-if="pickup.type.indexOf('pickup') > -1">{{ 'pickup.title' | translate }}#{{ pickup.id }}</div>
+                                        <div class="card__number" ng-if="pickup.type.indexOf('delivery') > -1">{{ 'delivery.title' | translate }}#{{ pickup.id }}</div>
+                                        <div class="card__info" ng-if="pickup.pickup_date">
+                                            <ul>
+                                                <li>
+                                                    <i class="fa fa-calendar"></i> {{ 'card.pickup_date' | translate }} {{ pickup.pickup_date | momentDate : 'dddd D/M/YYYY' }}
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-clock-o"></i> {{ pickup.displayPickupTime }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="card__info" ng-if="pickup.address">
+                                            <i class="fa fa-home"></i> {{ pickup.address }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cards-container">
+                                    <div class="card-container" ng-repeat="(key,item) in pickup.items | filter:query | filter:type | orderBy: order">
+                                        <div class="card {{ 'card--' + item.status }}">
+                                            <div class="card__content">
+                                                <div class="card__visual" ng-style="item.photo ? {'background-image': 'url(' + item.photo + ')'} : {}">
+                                                    <span ng-if="!item.photo">{{ 'card.no_picture' | translate }}</span>
+                                                </div>
+
+                                                <div class="card__description">
+                                                    <div class="card__details">
+                                                        <div class="card__title">{{ item.description || item.name }}</div>
+                                                        <div class="card__number">#{{ item.box_id }}</div>
+
+                                                        <div class="card__info" ng-if="item.storage_date">
+                                                            {{ 'card.storage_date' | translate }} {{ item.storage_date | momentDate : 'D/M/YYYY' | lowercase }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-container" ng-repeat="(key,item) in manager.itemsFiltered | filter:query | filter:type | orderBy: order" ng-if="manager.type != 'in_transit'">
+                        <div class="card {{ 'card--' + item.status }}" ng-class="{'selected': item.selected}" ng-click="item.canBeSelected && manager.toggleItem(item)" ng-cloak>
+                            <div class="card__content">
+                                <div class="card__visual" ng-style="item.photo ? {'background-image': 'url(' + item.photo + ')'} : {}">
+                                    <span ng-if="!item.photo">{{ 'card.no_picture' | translate }}</span>
+                                </div>
+
+                                <div class="card__description">
+                                    <div class="card__selectarea" ng-if="item.canBeSelected">
+                                        <input id="select-{{ key }}" type="checkbox" ng-model="item.selected" ng-change="manager.checkSelection()">
+                                        <label for="select-{{ key }}">
+                                            <svg width="28px" height="22px" viewBox="0 0 28 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                                                    <g id="profile-gerer-stocke" transform="translate(-451.000000, -620.000000)" stroke="#B6B6B6" stroke-width="2">
+                                                        <g id="objects" transform="translate(130.000000, 409.000000)">
+                                                            <g id="Group-5" transform="translate(310.000000, 195.000000)">
+                                                                <g id="Group-7">
+                                                                    <polyline id="Shape" points="33.9285714 18.75 20.5357143 31.25 16.0714286 26.7857143"></polyline>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </label>
+                                    </div>
+                                    <!-- in_storage -->
+                                    <div class="card__details" ng-if="item.status === 'STORED' || item.status === 'DROPPED' || item.status === 'INDEXED'">
+                                        <div class="card__title">{{ item.description || item.name }}</div>
+                                        <div class="card__number">#{{ item.box_id }}</div>
+
+                                        <div class="card__info" ng-if="item.storage_date">
+                                            {{ 'card.storage_date' | translate }} {{ item.storage_date | momentDate : 'D/M/YYYY' | lowercase }}
+                                        </div>
+                                    </div>
+                                    <!-- !in_storage -->
+
+                                    <!-- with_me -->
+                                    <div class="card__details" ng-if="item.status === 'DELIVERED' || item.status === 'CREATE'">
+                                        <div class="card__title" ng-hide="item.ending_date">{{ 'card.drop' | translate }} 1 {{ item.name || item.description }}</div>
+                                        <div class="card__title" ng-show="item.ending_date">{{ 'card.drop_back' | translate }} : "{{ item.name || item.description }}"</div>
+                                        <div class="card__number">#{{ item.box_id }}</div>
+                                    </div>
+                                    <!-- !with_me -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="animated fadeInLeft" id="section-reschedule" ng-show="manager.isScheduleMode" ng-cloak>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <questions ng-show="manager.isQuestionsMode && !manager.showCart"
+                                   answers="manager.answers"
+                                   callback="manager.toggleQuestionsForm(from, floor)"
+                        ></questions>
+                        <div ng-show="manager.showCart">
+                            <div class="cards-container">
+                                <div class="manager-thead" ng-show="manager.itemsFiltered.length">
+                                    <h4>
+                                        <span>{{ 'items.in_cart' | translate }}</span>
+                                    </h4>
+                                    <div>
+                                        <div>
+                                            <button class="btn btn-primary" type="button" ng-click="manager.toggleScheduleMode()">
+                                                {{ 'items.add_more' | translate }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-container" ng-repeat="(key,item) in manager.itemsSelected | filter:query | filter:type | orderBy: order">
+                                    <div class="card {{ 'card--' + item.status }}" ng-class="{'selected': item.selected}" ng-click="item.canBeSelected && manager.toggleItem(item)" ng-cloak>
+                                        <div class="card__content">
+                                            <div class="card__visual" ng-style="item.photo ? {'background-image': 'url(' + item.photo + ')'} : {}">
+                                                <span ng-if="!item.photo">{{ 'card.no_picture' | translate }}</span>
+                                            </div>
+
+                                            <div class="card__description">
+                                                <div class="card__selectarea" ng-if="item.canBeSelected">
+                                                    <input id="select-{{ key }}" type="checkbox" ng-model="item.selected" ng-change="manager.checkSelection()">
+                                                    <label for="select-{{ key }}">
+                                                        <svg width="28px" height="22px" viewBox="0 0 28 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                                                                <g id="profile-gerer-stocke" transform="translate(-451.000000, -620.000000)" stroke="#B6B6B6" stroke-width="2">
+                                                                    <g id="objects" transform="translate(130.000000, 409.000000)">
+                                                                        <g id="Group-5" transform="translate(310.000000, 195.000000)">
+                                                                            <g id="Group-7">
+                                                                                <polyline id="Shape" points="33.9285714 18.75 20.5357143 31.25 16.0714286 26.7857143"></polyline>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                    </label>
+                                                </div>
+                                                <!-- in_storage -->
+                                                <div class="card__details">
+                                                    <div class="card__title">{{ item.description || item.name }}</div>
+                                                    <div class="card__number">#{{ item.box_id }}</div>
+
+                                                    <div class="card__info" ng-if="item.storage_date">
+                                                        {{ 'card.storage_date' | translate }} {{ item.storage_date | momentDate : 'D/M/YYYY' | lowercase }}
+                                                    </div>
+                                                </div>
+                                                <!-- !in_storage -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="button" ng-click="manager.toggleCart()">
+                                {{ 'services.submit' | translate }}
+                            </button>
+                        </div>
+                        <div class="form-container" ng-show="!manager.isQuestionsMode && !manager.showCart">
+                            <form class="form" id="formReschedule" name="manager.formReschedule" novalidate>
+                                <h4 ng-show="manager.type != 'in_storage'">{{ 'form.reschedule' | translate }}</h4>
+                                <h4 ng-show="manager.type == 'in_storage'">{{ 'form.want_back' | translate }}</h4>
+
+                                <section class="address-section">
+                                    <div class="row">
+                                        <div class="form-group col-md-7">
+                                            <input-gplaces class="form-control" location="location" autocomplete="off"
+                                                           placeholder="{{ 'form.address' | translate }}" required
+                                                           ng-model="manager.formData.street"
+                                            ></input-gplaces>
+                                            <input type="hidden" ng-model="manager.formData.latitude">
+                                            <input type="hidden" ng-model="manager.formData.longitude">
+                                            <input type="hidden" ng-model="manager.formData.street">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <input class="form-control" required
+                                                   type="text" placeholder="{{ 'form.number' | translate }}"
+                                                   ng-model="manager.formData.number"
+                                            >
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <input class="form-control" name="box"
+                                                   type="text" placeholder="{{ 'form.box' | translate }}"
+                                                   ng-model="manager.formData.box"
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <input class="form-control" id="postalCode" required
+                                                   type="text" placeholder="{{ 'form.postalcode' | translate }}"
+                                                   ng-model="manager.formData.postalcode"
+                                            >
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <input class="form-control" required
+                                                   type="text" placeholder="{{ 'form.city' | translate }}"
+                                                   ng-model="manager.formData.city"
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <div class="divider divider--hidden"></div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <textarea class="form-control" id="add_infos"
+                                                   placeholder="{{ 'form.delivery_instructions' | translate }}"
+                                                   ng-model="manager.formData.add_infos"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- /.address-section -->
+
+                                <section class="pickup-section">
+                                    <input type="hidden" ng-model="manager.formData.pickup_date">
+
+                                    <div class="divider divider--hidden"></div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <div datepicker date-min-limit="{{ manager.minDate }}" date-set="{{ manager.minDate }}" date-week-start-day="1"
+                                                     date-disabled-dates="{{ manager.disabledDates | json }}" date-typer="true" date-format="yyyy-MM-dd"
+                                                     date-disabled-weekdays="{{ manager.disabledWeekDays }}">
+                                                    <input type="text"
+                                                           ng-change="manager.updatePickupDate()" ng-model="manager.pickupDate"
+                                                           class="form-control angular-datepicker-input"
+                                                           placeholder="{{ 'form.available_date' | translate }}" required
+                                                    >
+                                                </div>
+                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="input-group">
+                                                <select name="pickup_hour" class="form-control" id="pickup_hour"
+                                                        ng-model="manager.pickupTime"
+                                                        ng-change="manager.updatePickupDate()"
+                                                        required
+                                                >
+                                                    <option ng-repeat="(key, option) in manager.availableTimes" value="{{ key }}">
+                                                        {{ option }}
+                                                    </option>
+                                                </select>
+
+                                                <div class="input-group-addon"><i class="fa fa-clock-o"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="divider divider--hidden"></div>
+                                    <div ng-show="manager.type != 'with_me' && manager.isAllowedToWait()">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="checkbox wait-fill-boxes-checkbox">
+                                                    <input type="checkbox" id="wait_fill_boxes" ng-model="manager.wait_fill_boxes">
+                                                    <label for="wait_fill_boxes">
+                                                        {{ 'form.wait-fill-boxes' | translate }}
+                                                        <em class="fa fa-question-circle" data-toggle="tooltip" data-title="{{ 'form.end_subscription.tooltip' | translate }}" data-original-title="" title=""></em>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="manager.type === 'in_storage' && manager.isAllowedToResign()">
+                                        <div class="divider divider--hidden"></div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="checkbox wait-fill-boxes-checkbox">
+                                                    <input type="checkbox" id="end_subscription" ng-model="manager.end_subscription">
+                                                    <label for="end_subscription">{{ 'form.end_subscription' | translate }}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- /.pickup-section -->
+
+                                <button class="btn btn-primary" type="button"
+                                        ng-class="{'loading': manager.state == 'busy'}" ng-show="manager.type != 'in_storage'" ng-click="manager.updateSchedule()">
+                                    {{ 'form.button_reschedule' | translate }}
+                                </button>
+                                <button class="btn btn-primary" type="button"
+                                        ng-class="{'loading': manager.state == 'busy'}" ng-show="manager.type == 'in_storage'" ng-click="manager.updateSchedule()">
+                                    {{ 'form.button_get_back' | translate }}
+                                </button>
+                                <button class="btn btn-link" type="button" ng-click="manager.scheduleClose()">
+                                    {{ 'form.button_cancel' | translate }}
+                                </button>
+
+                                <div ng-show="manager.formSuccess">
+                                    <div class="divider divider--hidden"></div>
+                                    <div class="alert alert-success">{{ 'form.thank_you' | translate }}</div>
+                                </div>
+
+                                <div ng-show="manager.formErrors">
+                                    <div class="divider divider--hidden"></div>
+                                    <div class="alert alert-warning">
+                                        <ul>
+                                            <li ng-repeat="(key, item) in manager.formErrors">{{ item }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 order-resume-wrapper">
+                        <div class="order-resume following">
+                            <div class="order-items" ng-click="manager.toggleCart()" title="{{ 'items.title.label' | translate }}">
+                                <em class="fa fa-truck" aria-hidden="true"></em>
+                                <span class="badge">{{ manager.itemsSelected.length }}</span>
+                            </div>
+                            <answers data="manager.answers"
+                                    on-click="manager.toggleQuestionsForm(from, floor)"
+                                    button-visible="!manager.isQuestionsMode && !manager.showCart"></answers>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#section-reschedule -->
+        </div>
+    </div>
+</section><!-- / section-manager -->
+
+<!-- Modal -->
+<div class="modal fade" id="orderUpdateConfirmModal" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="orderUpdateConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="margin-top: 100px;" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderUpdateConfirmLabel">{{ 'confirm.modal.title' | translate }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span ng-if="manager.confirmationFor == 'cancel'">
+            {{ 'confirm.order.cancel' | translate }} <a target="_blank" href="/page/faq#question1_5">F.A.Q</a>
+          </span>
+          <span ng-if="manager.confirmationFor == 'update'">
+            {{ 'confirm.order.update' | translate }} <a target="_blank" href="/page/faq#question1_5">F.A.Q</a>
+          </span>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="manager.userConfirmation(true)">{{ 'confirm.yes' | translate }}</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="manager.userConfirmation(false)">{{ 'confirm.no' | translate }}</button>
+        </div>
+      </div>
+    </div>
+</div>

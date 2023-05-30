@@ -1,0 +1,15 @@
+////
+/// Flash message
+////
+
+.main-content {
+    > .alert {
+        left: auto;
+        margin: 10px;
+        min-width: 250px;
+        position: fixed;
+        right: 0;
+        top: 80px;
+        z-index: 1;
+    }
+}

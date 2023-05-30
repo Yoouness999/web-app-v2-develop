@@ -1,0 +1,25 @@
+.tpl-pages-service {
+    .section-service {
+        padding-top: 150px;
+    }
+
+    h1 {
+        font-size: 36px;
+        font-weight: 300;
+    }
+
+    .section-fits {
+        padding-bottom: 150px;
+    }
+
+    .bg-primary {
+        .form-group, .input-group {
+            &.has-error {
+                .error {
+                    color: white;
+                    font-size: .8em;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,45 @@
+ul.toggle {
+    position: relative;
+    display: table;
+    table-layout: fixed;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 23px;
+    background: #e6e6e6;
+    text-align: center;
+    list-style: none;
+
+    li {
+        display: table-cell;
+        vertical-align: middle;
+
+        input {
+            display: none;
+
+            &:checked + label {
+                background: #fff;
+            }
+        }
+
+        label {
+            display: block;
+            margin: 0;
+            padding: 7px 22px;
+            border-radius: 23px;
+            color: #4b4b4b;
+            font-size: 22px;
+            font-weight: 300;
+            cursor: pointer;
+            z-index: 2;
+
+            @media screen and (max-width: $screen-xs-max) {
+                padding: 7px 10px;
+                font-size: 16px;
+            }
+        }
+    }
+
+    @include xs-max {
+        width: 100%;
+    }
+}

@@ -1,0 +1,40 @@
+/* ======================================================
+*  Scaffolding
+*  =====================================================*/
+
+body {
+    // webkit fix (http://bit.ly/NEdoDq)
+    -webkit-backface-visibility: hidden;
+}
+
+// transition elements
+a,
+input,
+textarea,
+button {
+    //@include transition(all 300ms ease-out);
+}
+
+
+// responsive images
+img {
+	@include image-rendering();
+	@include img-responsive();
+    max-width: 100%;
+}
+
+// selection color
+@include selection {
+    background-color: lighten($brand-primary, 10%);
+}
+
+// firefox: remove dotted outline on focusable elements
+::-moz-focus-inner {
+    border: 0;
+}
+
+object,
+embed,
+iframe {
+    outline: 0;
+}

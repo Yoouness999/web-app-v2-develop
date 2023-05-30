@@ -1,0 +1,19 @@
+{
+	"name": "arx-modules/datamanager",
+	"description": "A Data Manager Modules",
+	"authors": [
+		{
+			"name": "Daniel Sum",
+			"email": "daniel@cherrypulp.com"
+		}
+	],
+  	"require" : {
+	  "anahkiasen/former": "*",
+	  "baum/baum": "~1.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Datamanager\\": ""
+		}
+	}
+}

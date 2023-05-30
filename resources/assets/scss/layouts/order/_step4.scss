@@ -1,0 +1,150 @@
+
+.tpl-order-billing {
+    .order-billing-form {
+        @media (max-width: $screen-xs-max) {
+            button[type="submit"] {
+                display: block;
+                width: 100%;
+            }
+        }
+        @media (min-width: $screen-sm-min) {}
+        @media (min-width: $screen-md-min) {}
+        @media (min-width: $screen-lg-min) {}
+    }
+}
+
+.tpl-order-billing .section-billing {
+    padding-top: 80px;
+}
+
+.tpl-order-billing h1 {
+    margin: 0 0 11px;
+    color: $text-color;
+    font-size: 36px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.tpl-order-billing .subtitle {
+    margin: 11px 0 25px;
+    color: $text-color;
+    font-weight: 500;
+    text-align: center;
+}
+
+.tpl-order-billing [name="payment_type"] {
+    display: none;
+}
+
+.tpl-order-billing [class^="payment-type"] {
+    display: none;
+}
+
+.tpl-order-billing #payment_type_credit-card:checked ~ .payment-type-credit-card {
+    display: block;
+}
+
+.tpl-order-billing #payment_type_sepa:checked ~ .payment-type-sepa {
+    display: block;
+}
+
+.tpl-order-billing #payment_type_bancontact:checked ~ .payment-type-bancontact {
+    display: block;
+}
+
+.tpl-order-billing .label-payment-type {
+    display: table;
+    margin: 0 0 42px;
+    width: 100%;
+    table-layout: fixed;
+
+    small {
+        display: block;
+        font-size: .5em;
+        font-style: italic;
+        line-height: .3em;
+    }
+}
+
+.tpl-order-billing .label-payment-type label {
+    display: table-cell;
+    vertical-align: top;
+    padding: 10px;
+    border-top: 1px solid #b7b7b7;
+    border-bottom: 1px solid #b7b7b7;
+    border-left: 1px solid #b7b7b7;
+    background: #fff;
+    color: $text-color;
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tpl-order-billing .label-payment-type label:first-child {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.tpl-order-billing .label-payment-type label:last-child {
+    border-right: 1px solid #b7b7b7;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.tpl-order-billing #payment_type_credit-card:checked ~ .label-payment-type [for="payment_type_credit-card"],
+
+.tpl-order-billing #payment_type_bancontact:checked ~ .label-payment-type [for="payment_type_bancontact"],
+
+.tpl-order-billing #payment_type_sepa:checked ~ .label-payment-type [for="payment_type_sepa"] {
+    background: $brand-primary;
+    color: #fff;
+}
+
+.tpl-order-billing .label-payment-type label:hover {
+    background: #fe004b;
+    color: #fff;
+}
+
+.tpl-order-billing .label-payment-type label:focus {
+    border-color: #cbcbcb;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 0 3px #cbcbcb;
+    outline: none;
+}
+
+.tpl-order-billing [for="card_number"] {
+    width: 100%;
+    padding-right: 200px;
+    background-repeat: no-repeat;
+    background-image:
+        //url('../img/order/billing/pay-discover.png'),
+        //url('../img/order/billing/pay-amex.png'),
+        url('../img/order/billing/pay-visa.png'),
+        url('../img/order/billing/pay-mastercard.png');
+    background-position: right center, right 50px center, right 100px center, right 150px center;
+}
+
+.tpl-order-billing [for="security_code"]:after {
+    content: '?';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin-left: 10px;
+    border: 1px solid $brand-primary;
+    border-radius: 50%;
+    color: $brand-primary;
+    font-size: 13px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.tpl-order-billing .notabene {
+    margin: 18px 0 43px;
+}
+
+.tpl-order-billing .notabene img {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-right: 5px;
+}

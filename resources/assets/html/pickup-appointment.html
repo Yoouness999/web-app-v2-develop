@@ -1,0 +1,289 @@
+<section class="stepbar stepbar-default">
+    <div class="container">
+        <h2 class="col-xs-4 stepbar__title" ui-sref="postalcode">{{ 'Schedule' | translate }}</h2>
+
+        <ul class="stepbar_nav nav navbar-nav navbar-right">
+            <li class="active">
+                <a href="#/appointment"><i class="fa fa-credit-card"></i> {{ 'Appointment' | translate }}</a>
+            </li>
+            <li>
+                <a><i class="fa fa-box"></i> {{ 'Review' | translate }}</a>
+            </li>
+            <li>
+                <a>{{ 'Confirmation' | translate }}</a>
+            </li>
+        </ul>
+    </div>
+</section><!-- /.stepbar -->
+
+<section class="section page-content animated fadeIn">
+    <form id="formAppointment" name="pickup.formAppointment" novalidate>
+
+        <div class="container">
+            <h1>{{ 'What would you like to store ?' | translate }}<a ng-mouseover="pickup.tips_1OIsOpen = 1" ng-click="pickup.tips_1OIsOpen = !pickup.tips_1OIsOpen"> <i class="fa fa-info-circle"></i></a></h1>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <div ng-show="pickup.tips_1OIsOpen" class="alert alert-info" translate="tips_1"></div>
+                </div>
+            </div>
+
+            <h2>{{ "Choose how many, we'll bring them to you :" | translate }}</h2>
+
+            <section class="box-section">
+                <div class="row">
+                    <div class="col-md-4"
+                         ng-repeat="(key,item) in pickup.typesBox track by $index">
+                        <div class="box-input mt-10">
+                            <div class="box-input__holder clearfix">
+                                <div class="box-input__thumb">
+                                    <img class="img-responsive" ng-src="{{ item.thumb }}" alt="">
+                                </div>
+                                <div class="box-input__content">
+                                    {{ ::item.name }}
+                                    <div>
+                                        {{ ::item.price }}{{ '€' | translate }} /{{ 'month' | translate }}
+                                    </div>
+                                </div>
+                                <div class="box-input__input">
+                                    <input class="form-control" type="text" ng-model="pickup.formData.items[key].number">
+                                </div>
+                                <div class="box-input__increment">
+                                    <a class="btn btn-block" ng-click="pickup.itemAdd(key)">+</a>
+                                    <a class="btn btn-block" ng-click="pickup.itemRemove(key)">-</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mt-25 animated fadeInDown" ng-show="pickup.formData.items['box'].number">
+                        <div class="well">
+                            <p>{{ "Always know what you're storing" | translate }}</p>
+
+                            <div>
+                                <div class="radio">
+                                    <input type="radio" name="box_photos_option"
+                                           ng-model="pickup.formData.items['box'].picture_option" id="optionPhoto1"
+                                           value="1"
+                                    >
+                                    <label for="optionPhoto1">{{ 'Yes, I want photos' | translate }}</label>
+                                </div>
+                                <div class="radio">
+                                    <input type="radio" name="box_photos_option" id="optionPhoto0"
+                                           ng-model="pickup.formData.items['box'].picture_option"
+                                           value="0"
+                                    >
+                                    <label for="optionPhoto0">{{ 'No thanks, just transcribe my labels' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.box-section -->
+
+            <section class="larger-items-section">
+                <h2>{{ 'Would you like to store any larger items ?' | translate }}</h2>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6 mt-10" ng-repeat="(key,item) in pickup.typesBulk track by $index">
+                                <div class="box-input">
+                                    <div class="box-input__holder clearfix">
+                                        <div class="box-input__thumb">
+                                            <img class="img-responsive" ng-src="{{ item.thumb }}" alt="">
+                                        </div>
+                                        <div class="box-input__content">
+                                            <span ng-bind-html="pickup.sce.trustAsHtml(item.name)"></span>
+                                            <div ng-hide="item.type == 'other'  || item.type == 'custom_box'">
+                                                {{ ::item.price }}{{ '€' | translate }}/{{ 'month' | translate }}
+                                            </div>
+                                            <div ng-show="item.type == 'other' || item.type == 'custom_box'" ng-bind-html="pickup.sce.trustAsHtml(item.description)"></div>
+                                        </div>
+                                        <div class="box-input__input">
+                                            <input class="form-control" type="text" ng-model="pickup.formData.items[key].number">
+                                        </div>
+                                        <div class="box-input__increment">
+                                            <a class="btn btn-block" ng-click="pickup.itemAdd(key)">+</a>
+                                            <a class="btn btn-block" ng-click="pickup.itemRemove(key)">-</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="col-md-8 mt-25 animated fadeInDown" ng-show="pickup.formData.items['other'].number">
+                        <div class="well">
+                            <p translate="Describe your item"></p>
+                            <div class="input-group mt-10"
+                                 ng-repeat="(key,item) in [].constructor(pickup.formData.items['other'].number) track by $index">
+                                <input type="text" class="form-control" name="box_photos_option"
+                                       ng-model="pickup.formData.items['other'].lists[key]" required
+                                >
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"
+                                            ng-click="pickup.otherItemAdd()"
+                                    >
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button"
+                                            ng-click="pickup.otherItemRemove(key)"
+                                    >
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.larger-items-section -->
+
+            <section class="address-section">
+                <h2>{{ 'What address should we meet you at?' | translate }} <a ng-mouseover="pickup.tooltip_addressIsOpen = 1" ng-click="pickup.tooltip_addressIsOpen = !pickup.tooltip_addressIsOpen"><i class="fa fa-info-circle"></i></a></h2>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="alert alert-info" ng-show="pickup.tooltip_addressIsOpen" translate="tooltip_address"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 mt-10">
+                        <input-gplaces class="form-control" location="location" autocomplete="off"
+                                       placeholder="{{ 'Enter your full address' | translate }}" required
+                                       ng-model="pickup.address"
+                        ></input-gplaces>
+                        <input type="hidden" ng-model="pickup.formData.latitude">
+                        <input type="hidden" ng-model="pickup.formData.longitude">
+                        <input class="form-control" ng-model="pickup.formData.number" type="hidden" required>
+                        <input class="form-control" ng-model="pickup.formData.street" type="hidden" required>
+                        <input class="form-control" ng-model="pickup.formData.postalcode" type="hidden" required>
+                        <input class="form-control" ng-model="pickup.formData.city" type="hidden" required>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-2 mt-10">
+                        <input class="form-control" ng-model="pickup.formData.box" type="text" placeholder="{{ 'box' | translate }}">
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-2 mt-10">
+                        <input class="form-control" id="postal_code" ng-model="pickup.formData.postalcode" type="text" placeholder="{{ 'postalcode' | translate }}" disabled required>
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-8">
+                        <input class="form-control" ng-model="pickup.formData.add_infos" type="text" name="add_infos"
+                               id="add_infos" placeholder="{{ 'Additionnal delivery instructions' | translate }}">
+                    </div>
+                </div>
+            </section>
+            <!-- /.address-section -->
+
+            <section class="fixed-total hidden-sm hidden-xs">
+                <div class="pull-right">
+                    <a class="btn btn-primary btn-block" href="javascript:window.scrollTo(0,document.body.scrollHeight);">
+                        {{ 'Monthly cost' | translate }} : {{ pickup.formData.total | currency : pickup.currency }}
+                    </a>
+                </div>
+            </section>
+            <!-- /.fixed-total -->
+
+            <section class="pickup-section">
+                <h2>
+                    {{ 'When should we swing by ?' | translate }} <a ng-mouseover="pickup.tooltip_swingBy = 1" ng-click="pickup.tooltip_swingBy = !pickup.tooltip_swingBy"><i class="fa fa-info-circle"></i></a>
+                </h2>
+                <div class="row" ng-show="pickup.tooltip_swingBy">
+                    <div class="col-sm-8">
+                        <div class="alert alert-info" translate="Available 7 days a week, 8AM–8PM"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-5">
+                        <div class="input-group mt-10">
+                            <div datepicker date-min-limit="{{ pickup.minDate }}" date-set="{{ pickup.minDate }}"
+                                 date-disabled-dates="pickup.disabledDates" date-typer="true" date-format="yyyy-MM-dd">
+                                <input type="text" ng-model="pickup.pickupDate" id="pickup_date"
+                                       class="form-control angular-datepicker-input"
+                                       placeholder="{{ 'Please select an available date' | translate }}" required
+                                >
+                            </div>
+                            <label for="pickup_date" class="input-group-addon"><i class="fa fa-calendar"></i></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="input-group mt-10">
+                            <select name="pickup_hour" class="form-control" id="pickup_hour"
+                                    ng-model="pickup.pickupTime"
+                                    ng-click="pickup.setDisabledHours()" ng-change="pickup.updatePickupDate()" required>
+                                <option ng-repeat="(key, option) in pickup.availableTimes" value="{{ key }}">{{ option }}</option>
+                            </select>
+                            <label for="pickup_hour" class="input-group-addon"><i class="fa fa-clock-o"></i></label>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" ng-model="pickup.formData.pickup_date">
+
+                <div class="row mt-10 animated fadeInDown" ng-show="pickup.formData.pickup_date">
+                    <div class="col-md-8">
+                        <div class="well">
+                            <p>{{ "After you're done packing, when should we pick up your stuff?" | translate }}</p>
+
+                            <div>
+                                <div class="radio">
+                                    <input type="radio" name="box_pickup_option"
+                                           ng-model="pickup.formData.pickup_option" checked="checked" id="pickupOption1" value="direct"/>
+                                    <label for="pickupOption1">{{ 'Right away. Our driver will wait up to 20 minutes while you pack.' | translate }}</label>
+                                </div>
+                                <div class="radio">
+                                    <input type="radio" name="box_pickup_option" id="pickupOption0"
+                                           ng-model="pickup.formData.pickup_option" value="delayed"/>
+                                    <label for="pickupOption0">{{ "I need more time. I'll schedule a separate pickup within 2 weeks." | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- /.pickup-section -->
+
+            <div class="total-section visible-xs-block visible-sm-block mt-25 row">
+                <div class="col-md-8">
+                    <div class="btn btn-block">
+                        {{ 'Monthly cost' | translate }} : {{ pickup.formData.total | currency : pickup.currency }}
+                    </div>
+                </div>
+            </div>
+            <!-- /.total-section -->
+
+            <div class="row mt-25">
+                <div class="col-md-8">
+                    <button class="btn btn-primary btn-block" id="submit" type="button" ng-click="pickup.goStep2()">
+                        {{ 'Continue' | translate }}
+                    </button>
+                </div>
+            </div>
+
+            <input type="hidden" ng-model="pickup.total" required>
+
+            <div class="row mt-25" ng-show="pickup.formErrors">
+                <div class="col-md-8">
+                    <div>
+                        <div class="alert alert-warning">
+                            <ul>
+                                <li ng-repeat="(key,item) in pickup.formErrors">{{ item }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</section><!-- / page-banner -->
+
+

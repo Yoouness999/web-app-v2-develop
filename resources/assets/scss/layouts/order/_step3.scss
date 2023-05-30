@@ -1,0 +1,226 @@
+/* Body */
+
+.tpl-order-appointment {
+    h1 {
+        margin: 0 0 63px;
+        color: $text-color;
+        font-size: 36px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .order-appointment-form {
+        @media (max-width: $screen-xs-max) {
+            button[type="submit"] {
+                display: block;
+                width: 100%;
+            }
+        }
+        @media (min-width: $screen-sm-min) {}
+        @media (min-width: $screen-md-min) {}
+        @media (min-width: $screen-lg-min) {}
+    }
+
+    .section label {
+        font-size: 22px;
+    }
+
+    .address-row {
+        margin: 0 0 50px;
+
+        .form-group {
+            margin-bottom: 0;
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+    }
+
+    #address {
+        padding-left: 36px;
+        background-image: url('../img/order/appointment/address.png');
+        background-repeat: no-repeat;
+        background-position: left 12px center;
+    }
+
+    .dropoff-date-input-group {
+        margin: 10px 0 0;
+    }
+
+    .pickup-date-input-group {
+        margin: 10px 0 0;
+    }
+
+    .dropoff-time-input-group {
+        margin: 15px 0 0;
+    }
+
+    .pickup-time-input-group {
+        margin: 15px 0 0;
+    }
+
+    .form-control[readonly] {
+        background: #fff;
+        cursor: pointer;
+    }
+
+    .form-control[disabled] {
+        background: #e6e6e6;
+    }
+
+    .wait-fill-boxes-checkbox {
+        margin: 28px 0 50px;
+
+        input[type="checkbox"] + label {
+            padding: 0;
+            color: $text-color;
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"] + label:before {
+            content: '';
+            position: static;
+            display: inline-block;
+            vertical-align: bottom;
+            width: 28px;
+            height: 28px;
+            margin-right: 12px;
+            border: 1px solid #b7b7b7;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        input[type="checkbox"]:checked + label:before {
+            content: '';
+            background: $brand-primary;
+        }
+
+        input[type="checkbox"] + label:after {
+            display: none;
+        }
+    }
+
+    .storing-duration {
+        margin: 0 0 40px;
+    }
+
+    .storing-duration > p {
+        margin: 0 0 30px;
+    }
+
+    .storing-duration-inputs {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+
+        [type="radio"] {
+            display: none;
+        }
+
+        label {
+            display: table-cell;
+            vertical-align: top;
+            padding: 10px;
+            border-top: 1px solid #b7b7b7;
+            border-bottom: 1px solid #b7b7b7;
+            border-left: 1px solid #b7b7b7;
+            background: #fff;
+            color: $text-color;
+            font-size: 22px;
+            font-weight: 500;
+            text-align: center;
+
+            &:nth-child(2) {
+                border-bottom-left-radius: 5px;
+                border-top-left-radius: 5px;
+            }
+
+            &:last-child {
+                border-right: 1px solid #b7b7b7;
+                border-bottom-right-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+
+            &:hover {
+                background: #fe004b;
+                color: #fff;
+
+                [data-toggle="tooltip"] {
+                    color: #fff;
+                }
+            }
+
+            &:focus {
+                border-color: #cbcbcb;
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 0 3px #cbcbcb;
+                outline: none;
+            }
+        }
+
+        input:checked + label {
+            background: $brand-primary;
+            color: #fff;
+
+            [data-toggle="tooltip"] {
+                color: #fff;
+            }
+        }
+    }
+
+    .order-resume {
+        display: inline-block;
+        margin-top: 37px;
+    }
+
+    input.datepicker {
+        font-size: 18px;
+    }
+}
+
+.datepicker-dropdown {
+    position: absolute;
+    right: auto;
+    overflow: visible;
+    width: auto;
+    font-size: 13px;
+}
+
+.datepicker-dropdown table {
+    background: $brand-primary;
+
+    tbody {
+        background-color: #fff;
+    }
+}
+
+.datepicker-dropdown table thead {
+    background: $brand-primary;
+    color: #fff;
+}
+
+.datepicker-dropdown .datepicker-switch {
+    font-size: 17px;
+}
+
+.datepicker-dropdown .dow {
+    font-size: 12px;
+}
+
+.datepicker-dropdown .datepicker-switch:hover,
+.datepicker-dropdown .next:hover,
+.datepicker-dropdown .prev:hover,
+.datepicker-dropdown table tr td span.focused,
+.datepicker-dropdown table tr td span:hover,
+.datepicker-dropdown tfoot tr th:hover {
+    background: $brand-primary;
+}

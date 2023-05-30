@@ -1,0 +1,29 @@
+body {
+    &.tpl-order-storage,
+    &.tpl-order-services,
+    &.tpl-order-appointment,
+    &.tpl-order-billing,
+    &.tpl-order-review {
+        .navbar {
+            .navbar-left {
+                display: none;
+            }
+
+            .navbar-right {
+                .name-dropdown, .navbar-btn {
+                    display: none;
+                }
+
+                .order-need-help {
+                    display: block;
+                }
+            }
+        }
+
+        .footer {
+            .second-row {
+                display: none;
+            }
+        }
+    }
+}

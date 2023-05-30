@@ -1,0 +1,95 @@
+/* ======================================================
+*  Mixins
+*  =====================================================*/
+
+@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+
+// imports
+@import "mixins/animation";
+@import "mixins/debug";
+@import "mixins/panels";
+@import "mixins/typography";
+@import "mixins/utils";
+
+// backgrounds
+@mixin bg-full($attachement: true) {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+	@if $attachement {
+		background-attachment: scroll;
+	    &.background-fixed {
+	        background-attachment: fixed;
+	    }
+	}
+}
+
+@mixin bg-striped($bg-color: #ccc, $darken-amount: 5%, $stripe-color: darken($bg-color, $darken-amount)) {
+    background-color: $bg-color;
+    background-image: linear-gradient(-45deg, $stripe-color 25%, transparent 25%, transparent 50%, $stripe-color 50%, $stripe-color 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+}
+
+// desaturate an image
+@mixin desaturate {
+	-webkit-filter: grayscale(1);
+	-webkit-filter: grayscale(100%);
+	filter: gray;
+	filter: grayscale(100%);
+}
+
+// add a focus state in the style of OS X Yosemite
+@mixin focus-ring($color: $brand-primary) {
+	&:focus,
+	&:focus:active {
+		border-color: $color;
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px $color;
+		outline: none;
+	}
+}
+
+// vertical-align anything (most things)
+@mixin vertical-align {
+	@include translate(0, -50%);
+	position: relative;
+	top: 50%;
+}
+
+/// Computes a top-shadow for a card effect.
+/// @param {Number} $depth - depth level
+/// @return {List}
+@function top-shadow($depth) {
+	$primary-offset: nth(1.5 3 10 14 19, $depth) * 1px;
+	$blur: nth(1.5 3 10 14 19, $depth) * 4px;
+	$color: rgba(black, nth(.12 .16 .19 .25 .30, $depth));
+
+	@return 0 $primary-offset $blur $color;
+}
+
+/// Computes a bottom-shadow for a card effect.
+/// @param {Number} $depth - depth level
+/// @return {List}
+@function bottom-shadow($depth) {
+	$primary-offset: nth(1.5 3 6 10 15, $depth) * 1px;
+	$blur: nth(1 3 3 5 6, $depth) * 4px;
+	$color: rgba(black, nth(.24 .23 .23 .22 .22, $depth));
+
+	@return 0 $primary-offset $blur $color;
+}
+
+
+/// Gives a card depth effect.
+/// @param {Number} $depth - depth level (between 1 and 5)
+/// @link http://www.google.com/design/spec/layout/layout-principles.html#layout-principles-dimensionality Google Design
+/// @requires {function} top-shadow
+/// @requires {function} bottom-shadow
+@mixin card($depth) {
+	@if $depth < 1 {
+		box-shadow: none;
+	} @else if $depth > 5 {
+		@warn "Invalid $depth `#{$depth}` for mixin `card`.";
+	} @else {
+		box-shadow: bottom-shadow($depth), top-shadow($depth);
+	}
+}

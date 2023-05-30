@@ -1,0 +1,35 @@
+/* ======================================================
+*  Auth
+*  =====================================================*/
+
+.section-signup,
+.section-login {
+	@extend .bg-full;
+	padding: 120px 0;
+
+	.panel {
+		> .panel-heading {
+			background-color: #fff;
+			padding: 25px 0 15px;
+		}
+
+		> .panel-body {
+			padding-left: 30px;
+			padding-right: 30px;
+
+			[type="submit"] {
+				margin-top: 40px;
+			}
+		}
+	}
+}
+
+.section-login {
+	.checkbox {
+		text-align: left;
+
+		input[type="checkbox"] {
+			visibility: visible;
+		}
+	}
+}

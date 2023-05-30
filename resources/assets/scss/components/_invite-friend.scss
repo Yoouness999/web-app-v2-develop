@@ -1,0 +1,42 @@
+/* ======================================================
+*  Invite Friend
+*  =====================================================*/
+
+.invite-friend-bar {
+	background-color: #fff;
+	box-shadow: 0 0 2px rgba(0, 0, 0, .3);
+	border-bottom: 2px solid $gray-light;
+	padding: 20px 0 15px;
+	text-align: center;
+}
+
+.invite-friend-text,
+.invite-friend-link,
+.invite-friend-social {
+	display: inline-block;
+}
+
+.invite-friend-text {
+	color: $brand-primary;
+}
+
+.invite-friend-link {
+	margin: 0 5px;
+}
+
+.invite-friend-field {
+	min-width: 300px;
+	height: 40px;
+}
+
+.invite-friend-social {
+	.btn {
+		font-size: 16px;
+		margin: 0 3px;
+		padding: 6px 20px;
+
+		.fa {
+			margin-right: 10px;
+		}
+	}
+}

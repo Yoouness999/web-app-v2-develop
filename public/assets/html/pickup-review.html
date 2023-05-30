@@ -1,0 +1,367 @@
+<section class="stepbar stepbar-default">
+    <div class="container">
+        <h2 class="col-xs-4 stepbar__title" ui-sref="postalcode">{{ 'Schedule' | translate }}</h2>
+        <ul class="stepbar_nav nav navbar-nav navbar-right">
+            <li>
+                <a href="#/appointment"><i class="fa fa-credit-card"></i> {{ 'Appointment' | translate }}</a>
+            </li>
+            <li class="active">
+                <a><i class="fa fa-box"></i> {{ 'Review' | translate }}</a>
+            </li>
+            <li>
+                <a>{{ 'Confirmation' | translate }}</a>
+            </li>
+        </ul>
+    </div>
+</section><!-- /.stebar -->
+
+<section class="section page-content animate fadeIn">
+    <div class="container">
+        <form id="formReview" name="pickup.formReview" novalidate>
+            <h2>{{ 'Confirm your details' | translate }}</h2>
+
+            <section id="summary-table" class="row">
+                <div class="col-sm-8">
+                    <section class="panel panel-outline">
+                        <div class="panel-heading">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <td class="text-left">{{ 'Item' | translate }}</td>
+                                    <td>&nbsp;</td>
+                                    <td class="text-right"><a ui-sref="appointment">{{ 'Edit' | translate }}</a></td>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table">
+                                <tbody>
+                                <tr ng-repeat="(key,item) in pickup.formData.items track by $index"
+                                    ng-show="item.number">
+                                    <td width="40"><img class="pull-left" ng-src="{{ item.thumb }}" alt=""/></td>
+                                    <td class="td-middle text-left">{{ item.number }} x {{ item.name }}</td>
+                                    <td width="20%" class="text-right">
+                                        {{ item.price * item.number | currency : pickup.currency}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-footer">
+                            <table class="table">
+                                <tr>
+                                    <td width="80%" class="text-right"><label class="mt-10" for="coupon">
+                                        {{ 'Coupon' | translate }}
+                                        <i ng-show="pickup.promoError" class="fa fa-times danger-text"></i> :</label>
+                                    </td>
+                                    <td width="20%" class="text-right">
+                                        <input class="form-control text-right" id="coupon" name="coupon" type="text"
+                                              ng-model="pickup.formData.promo_code"
+                                              ng-change="pickup.checkCoupon()"
+                                        >
+                                    </td>
+                                </tr>
+                                <tr ng-show="pickup.formData.promo_applied">
+                                    <td width="80%" class="text-right">{{ 'Coupon applied' | translate }} <i class="fa fa-check"></i> :</td>
+                                    <td width="20%" class="text-right">
+                                        - {{ pickup.formData.promo_applied | currency : pickup.currency }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="80%" class="text-right">{{ 'Montly cost estimation (VAT excl.)' | translate }}:</td>
+                                    <td width="20%" class="text-right">
+                                        {{ pickup.total /((21/100)+1) |currency : pickup.currency }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="80%" class="text-right">{{ 'Montly cost estimation (VAT incl.)' | translate }}:</td>
+                                    <td width="20%" class="text-right">
+                                        {{ pickup.total |currency : pickup.currency }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </section>
+            <!-- /#summary-table -->
+
+            <section id="summary-reviews">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="panel panel-outline">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-8 text-left">
+                                        {{ 'Date and time' | translate }}
+                                    </div>
+                                    <div class="col-xs-4 text-right">
+                                        <a ui-sref="appointment">{{ 'Edit' | translate }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td width="20%" valign="middle" class="text-right">
+                                            <i class="fa fa-calendar fa-2x"></i>
+                                        </td>
+                                        <td valign="middle" class="text-left">
+                                            {{ pickup.formData.pickup_date | momentDate : 'dddd D/M/YYYY' }}<br>
+                                            {{ pickup.formData.pickup_date | momentDate : 'HH:mm' }} - {{ pickup.formData.pickup_date | momentDate : 'HH:mm' : +2 : 'h' }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="panel panel-outline">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-8 text-left">
+                                        {{ 'Address' | translate }}
+                                    </div>
+                                    <div class="col-xs-4 text-right">
+                                        <a ui-sref="appointment">{{ 'Edit' | translate }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tr>
+                                        <td width="20%" valign="middle" class="text-right">
+                                            <i class="fa fa-map-marker fa-2x"></i>
+                                        </td>
+                                        <td valign="middle" class="text-left">
+                                            {{ pickup.formData.street }} {{ pickup.formData.number }}<br>
+                                            {{ pickup.formData.city }}, {{ pickup.formData.postalcode }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /#summary-reviews -->
+
+            <section id="contact-info" class="mt-50">
+                <h2>{{ 'Contact information' | translate }}</h2>
+
+                <div class="row">
+                    <div class="col-sm-4 mt-10">
+                        <input class="form-control" type="text" placeholder="{{ 'First Name' | translate }}"
+                               ng-model="pickup.formData.first_name" required>
+                    </div>
+                    <div class="col-sm-4 mt-10">
+                        <input class="form-control" type="text" placeholder="{{ 'Last Name' | translate }}"
+                               ng-model="pickup.formData.last_name" required>
+                    </div>
+                </div>
+
+                <div class="row mt-10">
+                    <div class="col-sm-4 mt-10">
+                        <input class="form-control" type="text" placeholder="{{ 'Phone number' | translate }}"
+                               ng-model="pickup.formData.phone" required>
+                    </div>
+                    <div class="col-sm-4 mt-10">
+                        <input class="form-control" type="text" placeholder="{{ 'Email' | translate }}" ng-model="pickup.formData.email" required>
+                    </div>
+                </div>
+            </section>
+            <!--#contact-info-->
+
+
+
+            <section id="payment-info" class="mt-50">
+                <h2>{{ 'Payment information' | translate }}</h2>
+
+                <div class="checkbox" ng-show="pickup.billing_status == 'paid'">
+                    <input type="checkbox" id="use_billing" ng-model="pickup.use_current_billing_info" value="1" />
+                    <label for="use_billing">{{ "Use my existing billing info" | translate }}</label>
+                </div>
+
+                <div ng-show="pickup.use_current_billing_info && pickup.billingInfo">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <input class="form-control" value="{{ pickup.billingInfo.card_name }}" type="text" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mt-10">
+                        <div class="col-sm-8">
+                            <input class="form-control" value="{{ pickup.billingInfo.card_number }}" type="text" disabled>
+                        </div>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <input class="pull-left form-control" value="{{pickup.billingInfo.card_expiration_year}}" style="width: 20%;" type="text" placeholder="MM" disabled>
+                                    <div class="pull-left" style="width: 20px;padding: 10px 5px 2px 5px">
+                                    </div>
+                                    <input class="pull-left form-control" value="{{pickup.billingInfo.card_expiration_month}}" style="width: 20%;" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-hide="pickup.use_current_billing_info">
+					<input class="hidden" type="radio" id="payment_type_credit-card" value="credit_card" checked ng-model="pickup.formData.payment_type" />
+					<input class="hidden" type="radio" id="payment_type_sepa" value="sepa" ng-model="pickup.formData.payment_type" />
+					
+					<div class="label-payment-type">
+						<label for="payment_type_credit-card">{{ 'Credit card' | translate }}</label>
+						<label for="payment_type_sepa">{{ 'SEPA' | translate }}</label>
+					</div>
+				
+					<div class="payment-type-credit-card" ng-hide="pickup.formData.payment_type != 'credit_card'">
+						<div class="row">
+							<div class="col-sm-8">
+								<input class="form-control" type="text" placeholder="{{ 'Name on card' | translate }}" ng-model="pickup.formData.card_name" ng-required="!pickup.use_current_billing_info" />
+							</div>
+						</div>
+
+						<div class="row mt-10">
+							<div class="col-sm-6">
+								<input class="form-control" type="text" placeholder="{{ 'Card Number' | translate }}" ng-model="pickup.formData.card_number" ng-required="!pickup.use_current_billing_info" mask="9999 9999 9999 9999" mask-validate="false" ng-keyup="pickup.checkCardNumber($event)" />
+							</div>
+							<div class="col-sm-2">
+								<img class="card-type visa" src="/assets/img/card-type-visa.png" alt="VISA" />
+								<img class="card-type mastercard" src="/assets/img/card-type-mastercard.png" alt="MASTERCARD" />
+							</div>
+						</div>
+						<div class="row mt-10"></label>
+							<div class="col-sm-3">
+								<input class="pull-left form-control" type="text" placeholder="MM" ng-model="pickup.formData.card_expiration_month" name="card_expiration_month" minlength="2" maxlength="2" ng-required="!pickup.use_current_billing_info" />
+							</div>
+							<div class="col-sm-3">
+								<input class="pull-left form-control" type="text" minlength="4" maxlength="4" placeholder="YYYY" ng-model="pickup.formData.card_expiration_year" name="card_expiration_year" ng-required="!pickup.use_current_billing_info" />
+							</div></label>
+							<div class="col-sm-2">
+								<input id="cvv" class="form-control" type="text" placeholder="___" maxlength="3" mask="999" ng-model="pickup.formData.card_cvv" ng-required="!pickup.use_current_billing_info" />
+							</div>
+						</div>
+					</div>
+		
+					<div class="payment-type-sepa" ng-hide="pickup.formData.payment_type != 'sepa'">
+						<div class="row">
+							<div class="col-sm-8">
+								<input class="form-control" type="text" placeholder="{{ 'IBAN' | translate }}" ng-model="pickup.formData.iban" ng-required="!pickup.use_current_billing_info" />
+							</div>
+						</div>
+						<div class="row mt-10">
+							<div class="col-sm-8">
+								<input class="form-control" type="text" placeholder="{{ 'Owner name' | translate }}" ng-model="pickup.formData.iban_owner" ng-required="!pickup.use_current_billing_info" />
+							</div>
+						</div>
+					</div>
+                </div>
+
+            </section>
+            <!--#payment-info-->
+
+            <section id="billing-info" class="mt-50">
+                <h2>{{ 'Billing information' | translate }}</h2>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="checkbox">
+                            <input type="checkbox" name="business" id="business" ng-model="pickup.formData.business"/>
+                            <label for="business">{{ "I'm professional" | translate }}</label>
+                        </div>
+                        <div class="checkbox mt-25">
+                            <input type="checkbox" name="billing_address" id="billing_address"
+                                   ng-model="pickup.formData.billing_address" value="{{ pickup.formData.billing_address }}"/>
+                            <label for="billing_address">{{ 'Different Billing address' | translate }}</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 mt-10 animated fadeIn" ng-show="pickup.formData.business == true">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-change="pickup.checkVat()"
+                                   ng-model="pickup.formData.billing_vat" value="{{ pickup.formData.billing_vat }}" placeholder="{{ 'VAT' | translate }}"/>
+                            <div class="input-group-addon">
+                                <i class="fa fa-check" ng-hide="pickup.vatError"></i>
+                                <i class="fa fa-times" ng-show="pickup.vatError"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section ng-show="pickup.formData.billing_address == true" class="animated fadeIn">
+                    <div class="row">
+                        <div class="col-sm-8 mt-10">
+                            <input class="form-control" ng-model="pickup.formData.billing_to" type="text"
+                                   placeholder="{{ 'Billing to' | translate }}"
+                            >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 mt-10">
+                            <input class="form-control" ng-model="pickup.formData.billing_street" type="text"
+                                   placeholder="{{ 'street' | translate }}"
+                            >
+                        </div>
+                        <div class="col-sm-2 mt-10">
+                            <input class="form-control" ng-model="pickup.formData.billing_number" type="text"
+                                   placeholder="{{ 'number' | translate }}"
+                            >
+                        </div>
+                        <div class="col-sm-2 mt-10">
+                            <input class="form-control" ng-model="pickup.formData.billing_box" type="text"
+                                   placeholder="{{ 'box' | translate }}"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="row mt-10">
+                        <div class="col-sm-2 mt-10">
+                            <input class="form-control" ng-model="pickup.formData.billing_postalcode"
+                                   type="text" placeholder="{{ 'postalcode' | translate }}"
+                            >
+                        </div>
+                        <div class="col-sm-6 mt-10">
+                            <input class="form-control" ng-model="pickup.formData.billing_city" type="text"
+                                   placeholder="{{ 'city' | translate }}"
+                            >
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <!--#billing-info-->
+
+            <div class="row mt-25">
+                <div class="col-sm-8">
+                    <div class="checkbox">
+                        <input id="agree" type="checkbox" name="agree" value="1" ng-model="pickup.formData.agree" required>
+                        <label for="agree" translate="I agree"></label>
+                    </div>
+                </div>
+            </div><!-- /#accept-terms -->
+
+            <div class="row mt-25">
+                <div class="col-sm-8">
+                    <a class="btn btn-primary btn-block" ng-hide="pickup.validating" ng-click="pickup.submitForm()">
+                        {{ 'Confirm' | translate }}
+                    </a>
+                    <a class="btn btn-primary btn-block" ng-show="pickup.validating">
+                        <i class="fa fa-refresh fa-spin"></i> {{ 'Validating' | translate }}
+                    </a>
+                </div>
+            </div><!-- /#submit -->
+
+            <div class="row mt-25" ng-show="pickup.formErrors">
+                <div class="col-sm-8 alert alert-warning">
+                    <ul>
+                        <li ng-repeat="(key,item) in pickup.formErrors">{{ item }}</li>
+                    </ul>
+                </div>
+            </div>
+        </form><!-- /#formReview -->
+    </div>
+</section><!-- / page-banner -->
+
+
+

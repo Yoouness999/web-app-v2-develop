@@ -1,0 +1,297 @@
+.tpl-order-review {
+    h1 {
+        margin: 0 0 63px;
+        color: $text-color;
+        font-size: 36px;
+        font-weight: 300;
+    }
+
+    .order-review-form {
+        @media (max-width: $screen-xs-max) {
+            button[type="submit"].btn-primary {
+                display: block;
+                width: 100%;
+            }
+        }
+        @media (min-width: $screen-sm-min) {}
+        @media (min-width: $screen-md-min) {}
+        @media (min-width: $screen-lg-min) {}
+    }
+
+    .checkbox {
+        input[type="checkbox"] + label {
+            &:after, &:before {
+                top: 3px;
+            }
+        }
+    }
+
+    .section {
+        .part {
+            margin: 0 0 40px;
+            padding-bottom: 33px;
+            border-bottom: 1px solid #b7b7b7;
+        }
+
+        .part-title {
+            color: $text-color;
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        .btn-facebook {
+            padding: 10px 30px 10px 44px;
+            background: #324d8f url('../img/order/review/fill-3.png') no-repeat center left 15px;
+            color: #fff;
+
+            &:hover {
+                background-color: #425d9f;
+            }
+        }
+    }
+
+    .login {
+        margin: 29px 0 0;
+    }
+
+    .bookin-overview-part {
+        .col-md-5 {
+            padding: 0 0 0 15px;
+        }
+
+        .plan {
+            width: 300px;
+            padding: 30px 0 50px;
+            background: #fff;
+            text-align: center;
+
+            .image img {
+                margin: auto;
+            }
+
+            .name {
+                margin: 30px 0 0;
+                color: $text-color;
+                font-size: 22px;
+                font-weight: 500;
+            }
+
+            .price {
+                margin: 0;
+                color: $text-color;
+                font-size: 22px;
+                font-weight: 300;
+            }
+        }
+
+        .text-help {
+            font-size: .8em;
+            font-style: italic;
+        }
+    }
+
+    .storage-supplies {
+        .introduction {
+            color: $text-color;
+            font-weight: 500;
+        }
+
+        .item {
+            display: block;
+            margin: 20px 0;
+            text-align: center;
+            width: 100%;
+
+            &:last-child {
+                text-align: right;
+            }
+
+            label {
+                font-weight: 300;
+            }
+        }
+
+        @media (max-width: $screen-xs-max) {
+            button[type="button"] {
+                display: block;
+                width: 100%;
+            }
+        }
+        @media (min-width: $screen-sm-min) {
+            padding: 100px 10px 0 30px;
+
+            .item {
+                display: inline-block;
+                margin: 0;
+                text-align: left;
+                width: 49%;
+            }
+        }
+        @media (min-width: $screen-md-min) {}
+        @media (min-width: $screen-lg-min) {}
+    }
+
+    .assurance-inputs {
+        width: 100%;
+
+        &.has-error {
+            label {
+                outline: 2px solid $state-danger-border;
+
+                .card-body {
+                    color: $state-danger-text;
+                }
+            }
+        }
+
+        &.untouched {
+            label {
+                opacity: 1;
+            }
+        }
+
+        [type="radio"] {
+            display: none;
+        }
+
+        label {
+            background: #fff;
+            border: 0;
+            color: $text-color;
+            cursor: pointer;
+            display: block;
+            font-weight: 300;
+            margin-bottom: 15px;
+            opacity: .5;
+            overflow: hidden;
+            padding: 0;
+            text-align: center;
+            vertical-align: top;
+
+            &:focus {}
+
+            &.disabled {
+                cursor: no-drop;
+                opacity: .5;
+
+                .card-heading {
+                    background-color: $gray-light;
+                }
+            }
+
+            strong {
+                display: block;
+                font-size: 22px;
+                font-weight: 500;
+
+                + strong {
+                    font-size: 18px;
+                }
+            }
+
+            .card-heading {
+                background-color: $brand-primary;
+                color: #fff;
+                padding: 16px 10px;
+            }
+
+            .card-body {
+                padding: 15px;
+
+                strong, & {
+                    font-size: .9em;
+                }
+            }
+        }
+
+        input:checked + label {
+            opacity: 1;
+        }
+    }
+
+    .appointment-part {
+        .appointment-block {
+            display: block;
+            vertical-align: top;
+            margin: 0 0 20px;
+
+            .label {
+                margin: 0;
+                padding: 0;
+                color: $text-color;
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            .edit {
+                float: right;
+            }
+
+            .date,
+            .time,
+            .route,
+            .city {
+                margin: 0;
+                color: $text-color;
+                font-weight: 300;
+            }
+        }
+    }
+
+    .other-address {
+        @media (max-width: $screen-xs-max) {
+            .btn-group {
+                .btn {
+                    border-radius: 4px !important;
+                    float: none;
+                    margin: 0 0 5px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    width: 100%;
+                }
+            }
+        }
+        @media (min-width: $screen-sm-min) {}
+        @media (min-width: $screen-md-min) {}
+        @media (min-width: $screen-lg-min) {}
+    }
+}
+
+
+.tpl-order-review .billing-part .card-number,
+.tpl-order-review .billing-part .iban {
+    margin: 0;
+    padding: 12px 0;
+    color: $text-color;
+    font-weight: 300;
+}
+
+.tpl-order-review .billing-part .card-number img {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 20px;
+}
+
+.tpl-order-review .order-content-wrapper .terms {
+    position: relative;
+    margin: 0 0 30px;
+    padding-left: 35px;
+    color: $text-color;
+    font-weight: 300;
+}
+
+.tpl-order-review .order-content-wrapper .terms:before {
+    content: '✓';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
+    border: 2px solid #4bca84;
+    border-radius: 50%;
+    color: #4bca84;
+    text-align: center;
+    font-size: 14px;
+}

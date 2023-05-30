@@ -1,0 +1,60 @@
+#cookie-bar {
+    background: transparentize(#000000, 0.3);
+    height: auto;
+    min-height: 24px;
+    line-height: 24px;
+    color: #eeeeee;
+    text-align: center;
+    padding: 1em;
+    z-index: 10000;
+
+    &.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    &.fixed.bottom {
+        bottom: 0;
+        top: auto;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        color: #ffffff;
+        display: inline-block;
+        border-radius: 3px;
+        text-decoration: none;
+        padding: 0 6px;
+        margin-left: 8px;
+    }
+
+    .cb-enable {
+        background: $brand-primary;
+    }
+
+    .cb-enable:hover {
+        background: $brand-primary;
+    }
+
+    .cb-disable {
+        background: #990000;
+    }
+
+    .cb-disable:hover {
+        background: #bb0000;
+    }
+
+    .cb-policy {
+        background: #0033bb;
+    }
+
+    .cb-policy:hover {
+        background: #0055dd;
+    }
+}

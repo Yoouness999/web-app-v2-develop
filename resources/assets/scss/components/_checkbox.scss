@@ -1,0 +1,263 @@
+@mixin checkbox-variant($text-color: $input-color, $border-color: $input-border, $background-color: $input-bg) {
+    input[type="checkbox"] {
+        cursor: pointer;
+        visibility: hidden;
+
+        + label {
+            padding-left: 25px;
+
+            &:after {
+                color: $text-color;
+                display: inline-block;
+                font-size: 11px;
+                height: 16px;
+                line-height: 16px;
+                left: 0;
+                margin-left: 0;
+                padding-top: 1px;
+                position: absolute;
+                text-align: center;
+                top: 0;
+                visibility: visible;
+                width: 16px;
+            }
+
+            &:before {
+                background-color: $background-color;
+                border: 1px solid darken($border-color, 5%);
+                border-radius: 3px;
+                content: '';
+                display: inline-block;
+                height: 17px;
+                left: 0;
+                margin-left: 0;
+                position: absolute;
+                @include transition(border 0.15s ease-in-out, color 0.15s ease-in-out);
+                top: 0;
+                visibility: visible;
+                width: 17px;
+            }
+        }
+
+        &:focus {
+            + label {
+                &:before {
+                    border-color: darken($border-color, 15%);
+                    @include box-shadow(none);
+                }
+            }
+        }
+
+        &:hover {
+            + label {
+                &:before {
+                    background-color: darken($background-color, 15%);
+                }
+            }
+        }
+
+        &:checked {
+            + label {
+                color: darken($text-color, 40%);
+                &:after {
+                    color: $text-color;
+                    content: $fa-var-check;
+                    font-family: 'FontAwesome';
+                }
+            }
+        }
+
+        &:disabled {
+            + label {
+                &:after {
+                    color: lighten($text-color, 20%);
+                    cursor: not-allowed;
+                }
+
+                &:before {
+                    background-color: $input-bg-disabled;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
+
+.checkbox {
+    @include checkbox-variant();
+}
+
+.form-group {
+    &.has-error {
+        .checkbox {
+            input[type="checkbox"] + label {
+                color: $alert-danger-text;
+            }
+        }
+    }
+}
+
+.checkbox--inline {
+    display: inline-block;
+    margin-top: 0;
+
+    input[type="checkbox"] + label {
+        padding-left: 5px;
+    }
+}
+
+.checkbox--justify {
+    display: table;
+    width: 100%;
+
+    .checkbox--inline {
+        display: table-cell;
+    }
+}
+
+
+// @todo Make a mixin like checkbox-variant()
+.checkbox--slider {
+    min-height: 1.5rem;
+
+    input[type="checkbox"] {
+        cursor: pointer;
+
+        + label {
+            line-height: 1rem;
+            padding-left: 4.5rem;
+            position: relative;
+            @include transition(color .2s ease);
+            @include user-select(none);
+
+            &:after {
+                background-color: $checkbox-slider-bg;
+                border: 1px solid $checkbox-slider-border;
+                border-radius: $checkbox-slider-radius-base;
+                content: '';
+                height: 1.5rem;
+                left: 0;
+                opacity: 1;
+                position: absolute;
+                top: -.25rem;
+                @include transform(none);
+                @include transition(left .3s ease 0s);
+                width: 1.5rem;
+                z-index: 2;
+            }
+
+            &:before {
+                background-color: darken($checkbox-slider-bg, 10%);
+                border: none !important;
+                border-radius: $checkbox-slider-radius-base;
+                cursor: pointer;
+                display: block;
+                content: '';
+                height: .25rem;
+                left: 0;
+                position: absolute;
+                top: .4rem;
+                @include transform(none);
+                @include transition(background .3s ease);
+                width: 3.5rem;
+                z-index: 1;
+            }
+        }
+
+        &:checked {
+            + label {
+                &:after {
+                    border-color: darken($checkbox-slider-bg, 30%);
+                    content: '';
+                    left: 2rem;
+                }
+                &:before {
+                    background-color: darken($checkbox-slider-bg, 20%);
+                }
+            }
+        }
+
+        &:disabled {
+            + label {
+                &:after {
+                    border-color: $input-bg-disabled;
+                    cursor: not-allowed;
+                }
+                &:before {
+                    background-color: $input-bg-disabled;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
+
+
+// @todo Make a mixin like checkbox-variant()
+.checkbox--toggle {
+    min-height: 1.5rem;
+
+    input[type="checkbox"] {
+        cursor: pointer;
+
+        + label {
+            padding-left: 4.5rem;
+
+            &:after {
+                background-color: $checkbox-toggle-bg;
+                border: 1px solid $checkbox-toggle-border;
+                border-radius: $checkbox-toggle-radius-base;
+                content: '';
+                height: 1.5rem;
+                left: 0;
+                opacity: 1;
+                position: absolute;
+                top: 0;
+                @include transition(background .3s ease 0s,left .3s ease 0s);
+                width: 1.5rem;
+                z-index: 2;
+            }
+
+            &:before {
+                background-color: darken($checkbox-toggle-bg, 10%);
+                border: none;
+                border-radius: $checkbox-toggle-radius-base;
+                content: '';
+                cursor: pointer;
+                display: block;
+                height: 1.5rem;
+                position: absolute;
+                top: 0;
+                width: 3.5rem;
+                z-index: 1;
+            }
+        }
+
+        &:checked {
+            + label {
+                &:after {
+                    border-color: darken($checkbox-toggle-bg, 30%);
+                    content: '';
+                    left: 2.05rem;
+                }
+
+                &:before {
+                    background-color: darken($checkbox-toggle-bg, 20%);
+                }
+            }
+        }
+
+        &:disabled {
+            + label {
+                &:after {
+                    border-color: $input-bg-disabled;
+                    cursor: not-allowed;
+                }
+                &:before {
+                    background-color: $input-bg-disabled;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}

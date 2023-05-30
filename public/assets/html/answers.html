@@ -1,0 +1,33 @@
+<div>
+    <h4>{{ 'services.resume.title' | translate }}</h4>
+
+    <!--<div ng-repeat="(key, item) in ctrl.answers">
+        <p class="service-label"></p>
+        <p>€<span class="service-appointment"></span></p>
+    </div>-->
+    <p class="appointment"><span class="value">0,00</span> €</p>
+
+    <div class="services date-items"
+        data-model="<div><p class='service-label'></p><p><span class='service-appointment'></span></p></div>"
+        data-model-empty="<div><p class='service-label'></p><p class='service-appointment'></p></div>"
+        >
+    </div>
+    <div class="services service-items"
+        data-model="<div><p class='service-label'></p><p><span class='service-appointment'></span></p></div>"
+        data-model-empty="<div><p class='service-label'></p><p class='service-appointment'></p></div>"
+        >
+    </div>
+
+    <div class="economy">
+        <p>
+            {{ 'services.economy' | translate }}
+        </p>
+        <p>
+            <span class="value">0</span> {{ '€' | translate }}
+        </p>
+    </div>
+
+    <button class="btn btn-primary" type="button" ng-click="ctrl.callback({from: 'answers'})" ng-show="ctrl.buttonVisible">
+        {{ 'services.buttons.change_answers' | translate }}
+    </button>
+</div>

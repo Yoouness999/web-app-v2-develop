@@ -1,0 +1,25 @@
+.tooltip {
+    font-size: .9em;
+    line-height: 1.2em;
+
+    &.top {
+        .tooltip-arrow {
+            border-top-color: $brand-primary;
+        }
+    }
+
+    .tooltip-inner {
+        background-color: $brand-primary;
+        color: #fff;
+        padding-bottom: 10px;
+        padding-top: 10px;
+
+        img {
+            margin-top: 10px;
+        }
+    }
+}
+
+[data-toggle="tooltip"] {
+    color: $brand-primary;
+}

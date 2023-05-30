@@ -1,0 +1,76 @@
+/* ======================================================
+*  Pickup
+*  =====================================================*/
+
+.tpl-user-pickup {
+    @media (max-width: $screen-sm-max) {
+        h1{
+            font-size: 30px;
+        }
+
+        h2{
+            font-size: 20px;
+        }
+    }
+}
+
+.tpl-user-pickup #payment-info {
+	.label-payment-type {
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+		margin: 0 0 42px;
+		
+		label {
+			display: table-cell;
+			vertical-align: top;
+			padding: 10px;
+			border-top: 1px solid #b7b7b7;
+			border-bottom: 1px solid #b7b7b7;
+			border-left: 1px solid #b7b7b7;
+			background: #fff;
+			color: $text-color;
+			font-size: 22px;
+			font-weight: 500;
+			text-align: center;
+			cursor: pointer;
+			
+			&:first-child {
+				border-bottom-left-radius: 5px;
+				border-top-left-radius: 5px;
+			}
+			
+			&:last-child {
+				border-right: 1px solid #b7b7b7;
+				border-bottom-right-radius: 5px;
+				border-top-right-radius: 5px;
+			}
+			
+			&:hover {
+				background: #fe004b;
+				color: #fff;
+			}
+			
+			&:focus {
+				border-color: #cbcbcb;
+				box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 0 3px #cbcbcb;
+				outline: none;
+			}
+		}
+	}
+
+	#payment_type_credit-card:checked ~ .label-payment-type [for="payment_type_credit-card"],
+	#payment_type_sepa:checked ~ .label-payment-type [for="payment_type_sepa"] {
+		background: $brand-primary;
+		color: #fff;
+	}
+}
+
+
+
+
+
+
+
+
+

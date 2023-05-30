@@ -1,0 +1,111 @@
+/**
+* Stepbar blok
+*/
+.stepbar {
+
+	/**
+	* Default skin
+	*/
+	&.stepbar-default {
+
+		background: $brand-primary;
+		color: #FFF;
+		padding: 0;
+		margin: 0;
+		
+		.stepbar__title {
+			font-size: 32px;
+			margin: 16px 0 0 0;
+			padding: 0;
+		}
+
+		ul.navbar-nav {
+			float: right;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			height: 72px;
+			li {
+				float: left;
+				padding: 0;
+				margin: 0;
+				vertical-align: middle;
+				height: 72px;
+				opacity: 0.8;
+
+				&:hover, &.active {
+					opacity: 1;
+				}
+
+				a {
+					padding: 20px !important;
+					display: inline-block;
+					color: #FFF !important;
+					height: 72px;
+					&:hover, &.active {
+						background: inherit !important;
+						opacity: 1;
+					}
+
+				}
+				&:not(:last-child):after {
+					padding: 0;
+					margin: 0;
+					float: right;
+					display: inline-block;
+					content: "\00a0";
+					background: url("../img/stepbar-arrow.png");
+					width: 36px;
+					height: 72px;
+				}
+			}
+		}
+	}
+
+	ul.navbar-nav {
+		float: right;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		li {
+			display: inline-table;
+			float: left;
+			margin: 0;
+			padding: 0;
+			vertical-align: middle;
+			a {
+				padding: 20px !important;
+				height: 72px;
+
+			}
+			&:not(:last-child):after {
+				padding: 0;
+				margin: 0;
+				float: right;
+				display: inline-block;
+				content: "\00a0";
+				background: url("../img/stepbar-arrow.png");
+				width: 36px;
+				height: 72px;
+			}
+		}
+
+
+
+		/**
+        * Custom behavior for smaller devices
+        */
+		@media (max-width: $screen-sm-max) {
+			li{
+				display: none;
+				&:not(:last-child):after {
+					//display: none !important;
+				}
+			}
+			li.active{
+				display: inline-table;
+			}
+		}
+	}
+
+}

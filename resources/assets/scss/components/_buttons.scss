@@ -1,0 +1,254 @@
+/* ======================================================
+*  Buttons
+*  =====================================================*/
+
+.btn {
+    @extend .font-museo-bold;
+    @include focus-ring($gray-light);
+    border: 0;
+    padding: 10px 30px;
+
+    &.disabled,
+    &[disabled] {
+        pointer-events: none;
+
+        &:focus {
+            box-shadow: none;
+            outline: 0;
+        }
+    }
+}
+
+/* Types
+---------------------------------------------- */
+.btn-primary {
+    &:hover {
+        background-color: lighten($brand-primary, 10%);
+    }
+}
+
+.btn-default {
+    background-color: $gray;
+    color: #fff;
+
+    &:hover,
+    &:focus,
+    &:focus:active {
+        background-color: lighten($gray, 10%);
+        color: #fff;
+    }
+
+    &.disabled,
+    &.disabled:hover,
+    &.disabled:focus {
+        background-color: $gray-light;
+    }
+}
+
+.btn-icon {
+    padding: 6px 12px;
+}
+
+.btn-white {
+    background-color: #fff;
+    border: 1px solid $btn-default-border;
+
+    &:hover,
+    &:focus,
+    &:focus:active {
+        background-color: darken(#fff, 10%);
+    }
+}
+
+.btn-link {
+    &:focus, &:hover {
+        text-decoration: underline;
+    }
+}
+
+.btn-group {
+    .btn {
+        background-color: #fff;
+        border: 1px solid #b7b7b7;
+
+        &.focus, &:focus {
+            outline: none !important;
+        }
+
+        &:hover {
+            background-color: $brand-danger;
+            box-shadow: none;
+            color: #fff;
+        }
+
+        &.active {
+            background-color: $brand-primary;
+            box-shadow: none;
+            color: #fff;
+        }
+    }
+}
+
+/* Sizes
+---------------------------------------------- */
+.btn-xs {
+    font-size: 14px;
+    padding: 5px 15px;
+}
+
+/* Outline
+---------------------------------------------- */
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #fff;
+
+    &:hover {
+        border: 1px solid #fff;
+    }
+}
+
+.btn-outline-inverse {
+    background-color: transparent;
+    border: 1px solid $gray-light;
+
+    &:hover {
+        border: 1px solid $gray-light;
+    }
+}
+
+/* Social
+---------------------------------------------- */
+.btn-facebook {
+    color: $facebook;
+    border-color: $facebook;
+
+    &:hover {
+        color: $facebook;
+    }
+}
+
+.btn-twitter {
+    color: $twitter;
+    border-color: $twitter;
+
+    &:hover {
+        color: $twitter;
+    }
+}
+
+.btn-email {
+    color: $email;
+    border-color: $email;
+
+    &:hover {
+        color: $email;
+    }
+}
+
+/* Button Circle
+---------------------------------------------- */
+@mixin button-circle() {
+    @include button-size(5px, 5px, $font-size-base, $line-height-base, $btn-circle-radius);
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn-circle {
+    @include button-circle();
+
+    &.btn-xs {
+        @include button-size($btn-circle-xs-padding, $btn-circle-xs-padding, $font-size-small, $line-height-small, $btn-circle-radius);
+    }
+
+    &.btn-sm {
+        @include button-size($btn-circle-small-padding, $btn-circle-small-padding, $font-size-small, $line-height-small, $btn-circle-radius);
+    }
+
+    &.btn-lg {
+        @include button-size($btn-circle-large-padding, $btn-circle-large-padding, $font-size-large, $line-height-large, $btn-circle-radius);
+    }
+}
+
+/* Loading
+---------------------------------------------- */
+.btn.loading {
+    color: transparent !important;
+    cursor: default;
+    display: inline-block;
+    opacity: .8;
+    overflow: visible;
+    pointer-events: none;
+    position: relative;
+    text-shadow: none !important;
+
+    &:after, &:before {
+        border-radius: $loader-circular-radius;
+        content: '';
+        height: 20px;
+        left: 50%;
+        margin-left: -10px;
+        margin-top: -10px;
+        position: absolute;
+        top: 50%;
+        width: 20px;
+    }
+
+    &:before {
+        border: $loader-line-width solid $loader-fill-color;
+    }
+
+    &:after {
+        @include spin();
+        border-color: $loader-shape-color transparent transparent;
+        border-style: solid;
+        border-width: $loader-line-width;
+        box-shadow: 0 0 0 1px transparent;
+    }
+
+    &.btn-xs {
+        &:after, &:before {
+            height: 16px;
+            margin-left: -8px;
+            top: 3px;
+            width: 16px;
+        }
+    }
+
+    &.btn-sm {
+        &:after, &:before {
+            top: 4px;
+        }
+    }
+
+    &.btn-lg {
+        &:after, &:before {
+            height: 26px;
+            margin-left: -13px;
+            top: 8px;
+            width: 26px;
+        }
+    }
+}
+
+@include keyframes(progress-bar-stripes) {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 0;
+    }
+}
+
+.btn-loading {
+    pointer-events: none;
+
+    &.btn {
+        // background-image: linear-gradient(45deg, rgba(235, 235, 235, 0.15) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(235, 235, 235, 0.15) 50%, rgba(235, 235, 235, 0.15) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
+        background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, rgba(0, 0, 0, .05) 25%, rgba(0, 0, 0, .05) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, rgba(0, 0, 0, .05) 75%, rgba(0, 0, 0, .05)) !important;
+        background-size: 40px 40px;
+        animation: 2s linear 0s normal none infinite progress-bar-stripes;
+        -webkit-animation: progress-bar-stripes 2s linear infinite;
+        display: inline-block;
+    }
+}

@@ -1,0 +1,35 @@
+/* ======================================================
+*  Backgrounds
+*  =====================================================*/
+
+@include bg-variant('.bg-gray-darker', $gray-darker);
+@include bg-variant('.bg-gray-dark', $gray-dark);
+@include bg-variant('.bg-gray', $gray);
+@include bg-variant('.bg-gray-light', $gray-light);
+@include bg-variant('.bg-gray-lighter', $gray-lighter);
+@include bg-variant('.bg-white', #fff);
+
+.bg-gray-darker,
+.bg-gray-dark,
+.bg-gray,
+.bg-gray-light {
+    color: #fff;
+}
+
+.bg-primary,
+.bg-info,
+.bg-success,
+.bg-warning,
+.bg-danger,
+.bg-gray-ligth,
+.bg-gray,
+.bg-gray-dark,
+.bg-gray-darker {
+    a {
+        color: #fff;
+    }
+
+    .divider:not(.divider--vertical):not(.divider--horizontal) {
+        border-color: rgba(255, 255, 255, .1);
+    }
+}

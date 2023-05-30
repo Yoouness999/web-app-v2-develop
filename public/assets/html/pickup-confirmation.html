@@ -1,0 +1,52 @@
+<section class="stepbar stepbar-default">
+    <div class="container">
+        <h2 class="col-xs-4 stepbar__title">{{ 'Schedule' | translate }}</h2>
+        <ul class="stepbar_nav nav navbar-nav navbar-right">
+            <li>
+                <a href="#/appointment"><i class="fa fa-credit-card"></i> {{ 'Appointment' | translate }}</a>
+            </li>
+            <li>
+                <a><i class="fa fa-box"></i> {{ 'Review' | translate }}</a>
+            </li>
+            <li class="active">
+                <a>{{ 'Confirmation' | translate }}</a>
+            </li>
+        </ul>
+    </div>
+</section><!-- /.stepbar -->
+
+<section class="section page-content animated fadeInDown">
+    <div class="container">
+        <h2 class="text-center">{{ 'Confirmation' | translate }}</h2>
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-2">
+                <img class="center-block mt-20" src="/assets/img/service-placeholder.png" alt="">
+            </div>
+            <div class="col-sm-5">
+                <div class="well">
+                    <div class="clearfix">
+                        <img class="pull-left pr-10" src="/assets/img/ico-check-green.png" alt="">
+                        <h5 class="p-10">{{ 'Your pickup is confirmed' | translate }}</h5>
+                    </div>
+                    <div class="mt-25">
+                        {{ pickup.formData.pickup_date | momentDate : 'dddd D/M/YYYY' }}<br>
+                        <strong>{{ pickup.formData.pickup_date | momentDate : 'HH:mm' }} - {{ pickup.formData.pickup_date | momentDate : 'HH:mm' : +2 : 'h' }}</strong>
+                    </div>
+                    <div class="mt-25">
+                        {{ pickup.formData.street }} {{ pickup.formData.number }}<br>
+                        <strong>{{ pickup.formData.city }}, {{ pickup.formData.postalcode }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-2">
+            </div>
+            <div class="col-sm-5">
+                <a href="/user/manager#/my-stuff" class="btn btn-primary">{{ 'Go to the manager' | translate }}</a>
+            </div>
+        </div>
+    </div>
+</section><!-- /.page-content -->
+
+

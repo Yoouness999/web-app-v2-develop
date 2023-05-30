@@ -1,0 +1,36 @@
+before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+stages:
+    - develop
+    - demo
+    - acc
+    - master
+
+develop:
+    stage: develop
+    only:
+        - develop
+    script:
+        - ssh root@staging.boxify.be -p 2222 "cd /home/boxify/web/staging && git pull && chown -R www-data:www-data /home/boxify/web/staging"
+demo:
+    stage: demo
+    when: manual
+    script:
+        - echo "A adapter suivant le case"
+acc:
+    stage: acc
+    when: manual
+    script:
+        - echo "A adapter suivant le case"
+master:
+    stage: master
+    when: manual
+    script:
+        - echo "A adapter suivant le case"

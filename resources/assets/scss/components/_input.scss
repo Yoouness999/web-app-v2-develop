@@ -1,0 +1,35 @@
+.input-group {
+    &.loading {
+        display: table;
+
+        .input-group-addon {
+            padding-left: 1.2em;
+            padding-right: 1.2em;
+            position: relative;
+
+            .loader {
+                //@extend .loader--sm;
+            }
+        }
+    }
+
+    span.btn-primary {
+        &:focus, &:hover {
+            background-color: $brand-primary !important;
+        }
+    }
+}
+
+.input-repeated {
+    position: relative;
+
+    .btn {
+        border-radius: 50%;
+        padding: 0;
+        height: 35px;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        width: 35px;
+    }
+}

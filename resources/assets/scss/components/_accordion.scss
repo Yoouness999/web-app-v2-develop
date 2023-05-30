@@ -1,0 +1,61 @@
+/* ======================================================
+*  Accordion
+*  =====================================================*/
+
+.accordion{
+
+	.accordion-group {
+		border-bottom: 1px solid $gray-light;
+		padding: 10px 0;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+
+	.accordion-header {
+		margin-bottom: 15px;
+
+		&:before {
+			content: '-';
+			float: left;
+			margin-right: 15px;
+		}
+
+		&.collapsed:before {
+			content: '+';
+		}
+	}
+
+	.accordion-body {
+		padding: 10px 25px;
+	}
+}
+
+.accordion.accordion-big{
+
+
+	.accordion-group {
+
+		border-bottom: 1px solid $gray-light;
+	}
+
+	.accordion-header {
+		font-size: 24px;
+		margin-bottom: 15px;
+
+		&:before {
+			content: '\00a0';
+			float: right;
+			background: url("../img/ico-minus.png") no-repeat top right;
+			margin-right: 15px;
+			height: 34px;
+			width: 34px;
+		}
+
+		&.collapsed:before {
+			content: '\00a0';
+			background: url("../img/ico-plus.png") no-repeat top right;
+		}
+	}
+}

@@ -1,0 +1,137 @@
+/* ======================================================
+*  Footer
+*  =====================================================*/
+
+.footer {
+    background-color: $gray-lighter;
+
+    a {
+        color: $text-color;
+
+        &:focus, &:hover {
+            color: $link-color;
+        }
+    }
+
+    .row {
+        border-bottom: 1px solid #fff;
+
+    }
+
+    .first-row {
+        padding-top: 15px;
+
+        @media (max-width: $screen-md-min) {
+            &, .text-right {
+                text-align: center;
+            }
+        }
+
+        h4 {
+            font-weight: 500;
+        }
+    }
+
+    .second-row {
+        padding-top: 10px;
+        padding-bottom: 20px;
+
+        h4 {
+            margin-bottom: 5px;
+            margin-top: 25px;
+            padding: 0;
+        }
+
+        @media (max-width: $screen-md-min) {
+            text-align: center;
+
+            img {
+                margin: 0 auto;
+            }
+        }
+    }
+
+    .third-row {
+        padding-top: 20px;
+        padding-bottom: 5px;
+
+        h4 {
+            margin-bottom: 0;
+        }
+    }
+
+    h4 {
+        font-weight: 300;
+        font-size: 18px;
+        padding-bottom: 15px;
+        padding-top: 5px;
+
+        .fa {
+            color: $brand-primary;
+            font-size: 28px;
+            margin-right: 10px;
+            position: relative;
+            top: 3px;
+        }
+    }
+
+    @media (max-width: $screen-xs-max) {
+        .first-row {
+            h4 {
+                line-height: 1.6em;
+                margin-bottom: 5px;
+            }
+
+            .text-right {
+                text-align: center;
+            }
+        }
+    }
+    @media (min-width: $screen-sm-min) {}
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}
+
+.footer-brand {
+    display: block;
+    margin-top: 30px;
+
+    img {
+        width: 140px;
+    }
+}
+
+.nav-footer {
+    @extend .list-unstyled;
+    margin-top: 25px;
+
+    > li {
+        margin-bottom: 10px;
+        margin-top: 5px;
+
+        > a {
+            color: $text-color;
+
+            &:hover {
+                color: $brand-primary;
+            }
+        }
+    }
+
+    @media (max-width: $screen-sm-min) {
+        margin-top: 15px;
+
+        > li {
+            margin-bottom: 20px;
+        }
+    }
+    @media (max-width: $screen-xs-max) {
+        > li {
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+    }
+    @media (min-width: $screen-sm-min) {}
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}

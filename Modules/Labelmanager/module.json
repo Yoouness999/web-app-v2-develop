@@ -1,0 +1,15 @@
+{
+    "name": "Labelmanager",
+    "alias": "labelmanager",
+    "description": "Simple Label Manager to handle lang text",
+    "keywords": ["labels"],
+    "active": 1,
+    "order": 3,
+    "providers": [
+        "Modules\\Labelmanager\\Providers\\LabelmanagerServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

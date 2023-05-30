@@ -1,0 +1,239 @@
+.tpl-pages-pricing {
+    .section-pricing-title {
+        padding: 155px 0 0;
+    }
+
+    .order-storage-form {
+        .section-storage {
+            padding-top: 30px;
+        }
+
+        h2 {
+            display: none;
+        }
+
+        .plan {
+            padding: 20px;
+        }
+
+        .plans-detail {
+            display: none;
+        }
+
+        #grid-plans .plan {
+            border: 0;
+            margin-bottom: 15px;
+        }
+
+        .calculator {
+            display: block;
+            border: 0;
+
+            .text {
+                display: block;
+                padding-bottom: 13px;
+                text-align: center;
+            }
+
+            .button {
+                display: block;
+                padding-top: 13px;
+                padding-bottom: 10px;
+                text-align: center;
+            }
+        }
+    }
+
+    .section-pricing-order .order-form {
+        font-weight: 300;
+
+        [name="zip_code"] {
+            background: #f2f2f2;
+        }
+
+        a {
+            font-weight: 500;
+            color: $text-color;
+        }
+    }
+
+    .section-pricing-delivery {
+        img {
+            margin: auto;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 500;
+        }
+
+        .subtitle {
+            font-size: 22px;
+        }
+    }
+
+    .section-billing {
+        h2 {
+            margin: 0 0 40px;
+        }
+
+        .well {
+            margin-bottom: 0;
+            padding: 0;
+            background: none;
+            border: 0;
+            box-shadow: none;
+            font-size: 22px;
+        }
+
+        p {
+            @include clearfix;
+            line-height: 40px;
+        }
+
+        .icon-wrapper {
+            border: 2px solid $brand-green;
+            border-radius: 50%;
+            display: block;
+            float: left;
+            height: 40px;
+            line-height: 31px;
+            margin-bottom: 2px;
+            margin-right: 15px;
+            text-align: center;
+            vertical-align: middle;
+            width: 40px;
+        }
+
+        .icon-wrapper i {
+            color: $brand-green;
+            font-size: 14px;
+        }
+    }
+
+    .section-pricing-calendar {
+        padding: 30px 0 100px;
+
+        .image-car img {
+            margin: auto;
+        }
+
+        .title {
+            margin: 40px 0 0;
+            font-size: 36px;
+        }
+
+        .content {
+            margin: 0 0 40px;
+        }
+
+        .calendar {
+            .title {
+                margin: 0 0 10px;
+                font-size: 18px;
+                font-weight: 500;
+            }
+
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .regular-days {
+                padding: 20px;
+
+                .title {
+                    color: $brand-green;
+
+                    &:before {
+                        content: '';
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 24px;
+                        height: 24px;
+                        margin-right: 10px;
+                        background: $brand-green;
+                    }
+                }
+
+                @media (max-width: $screen-xs-max) {
+                    text-align: center;
+                }
+                @media (min-width: $screen-sm-min) {
+                    /*padding: 70px 20px 0 40px;*/
+                }
+                @media (min-width: $screen-md-min) {}
+                @media (min-width: $screen-lg-min) {}
+            }
+
+            .busy-days {
+                padding: 20px;
+
+                .title {
+                    color: $brand-gray2;
+
+                    &:before {
+                        content: '';
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 24px;
+                        height: 24px;
+                        margin-right: 10px;
+                        background: $brand-gray2;
+                    }
+
+                    &[data-toggle="tooltip"] {
+                        &:after {
+                            content: '?';
+                            display: inline-block;
+                            vertical-align: middle;
+                            width: 16px;
+                            height: 16px;
+                            border: 1px solid $brand-gray2;
+                            border-radius: 50%;
+                            font-size: 10px;
+                            text-align: center;
+                            line-height: 13px;
+                        }
+                    }
+                }
+
+                @media (max-width: $screen-xs-max) {
+                    text-align: center;
+                }
+                @media (min-width: $screen-sm-min) {
+                    /*padding: 70px 0 0 20px;*/
+                }
+                @media (min-width: $screen-md-min) {}
+                @media (min-width: $screen-lg-min) {}
+            }
+        }
+    }
+}
+
+.section-pricing-schedule {
+    .container {
+        transform: translateY(-70px);
+    }
+
+    .image-car {
+        img {
+            width: 270px;
+            margin: auto;
+        }
+    }
+
+    .title {
+        font-weight: 500;
+    }
+
+    .input-group-btn .btn.btn-primary {
+        border: 2px solid #fff;
+        padding: 8px 30px;
+    }
+
+    .alert-warning a {
+        color: #000;
+    }
+}

@@ -1,0 +1,170 @@
+body.tpl-order-confirmation {
+    .main-content {
+        margin-top: 80px;
+    }
+
+    #panel-faq {
+        .list-unstyled {
+
+        }
+    }
+
+    h1, h2 {
+        font-size: 36px;
+        margin-bottom: 50px;
+    }
+
+    h1 {
+        background: url(../img/order/confirmation/icon-check.png) no-repeat 50% 0;
+        padding-top: 80px;
+    }
+
+    h3 {
+        color: $brand-primary;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .list-arrow {
+        > li {
+            &:before {
+                background-image: url(../img/icon-arrow.png);
+            }
+
+            a {
+                color: $text-color;
+
+                &:focus, &:hover {
+                    color: $brand-primary;
+                }
+            }
+        }
+    }
+
+    .panel-danger {
+        background-color: #fff;
+
+        .panel-heading {
+            background-color: $brand-primary;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 20px 30px;
+            text-align: left;
+
+            .pull-right {
+                font-size: 22px;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+        }
+        .panel-body {
+            color: $gray;
+            font-size: 18px;
+            padding: 20px 30px;
+            text-align: left;
+
+            .list-unstyled {
+                margin-bottom: 0;
+            }
+        }
+        .panel-footer {
+            background-color: #fff;
+            color: $gray;
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0 30px;
+            padding: 20px 0;
+        }
+    }
+
+    .panel-default {
+        .list-check {
+            li {
+                margin-bottom: 20px;
+
+                &:before {
+                    background-image: url(../img/icon-check-red.png);
+                }
+            }
+        }
+
+        .list-inline {
+            li {
+                font-weight: bold;
+                padding-bottom: 10px;
+                text-align: center;
+                vertical-align: top;
+                width: 45%;
+
+                img {
+                    margin: 0 auto 10px;
+                }
+            }
+        }
+
+        @media (max-width: $screen-xs-max) {}
+        @media (min-width: $screen-sm-min) {}
+        @media (min-width: $screen-md-min) {
+            .list-inline {
+                li {
+                    width: 20%;
+                }
+            }
+
+            .panel-body {
+                padding: 10px 30px;
+            }
+        }
+        @media (min-width: $screen-lg-min) {}
+    }
+
+    .section--thankyou {
+        .btn-primary {
+        }
+    }
+
+    .section--tips {
+
+    }
+
+    @media (max-width: $screen-xs-max) {
+        h1, h2 {
+            font-size: 32px;
+        }
+
+        .panel-danger {
+            .panel-heading {
+                .pull-right {
+                    float: none !important;
+                }
+            }
+        }
+
+        .list-arrow,
+        .list-check {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+    @media (min-width: $screen-sm-min) {
+        .section--thankyou {
+            .btn-primary {
+                position: relative;
+
+                &:before {
+                    background: url(../img/order/confirmation/arrow-right.png) 50% 50% no-repeat;
+                    content: '';
+                    display: block;
+                    left: -75px;
+                    height: 50px;
+                    position: absolute;
+                    top: -15px;
+                    width: 70px;
+                }
+            }
+        }
+    }
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}

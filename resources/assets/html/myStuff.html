@@ -1,0 +1,36 @@
+<!-- page-banner -->
+<div class="page-banner page-banner-sm" style="background-image: url('/assets/img/bg-banner.jpg')">
+    <img class="sr-only" src="/assets/img/bg-banner.jpg" alt="Banner">
+</div><!-- / page-banner -->
+
+<!-- page-content -->
+<section class="section page-content">
+    <h1 class="text-center">My Stuff</h1>
+    <ul class="list-inline text-center">
+        <li>
+            <a ui-sref="in_storage">
+                <img src="/assets/img/ico-square-warehouse.png" alt="">
+
+                <p>{{ manager.items_in_storage_nb || 0 }}</p>
+
+                <p>{{ 'Items in storage' | translate }}</p>
+            </a>
+        </li>
+        <li><a ui-sref="in_transit">
+            <img src="/assets/img/ico-square-truck.png" alt="">
+
+            <p>{{ manager.items_in_transit_nb || 0 }}</p>
+            <p>{{ 'Items in transit' | translate }}</p>
+        </a>
+        </li>
+        <li><a ui-sref="with_me">
+
+            <img src="/assets/img/ico-square-house.png" alt="">
+
+            <p>{{ manager.items_with_me_nb || 0 }}</p>
+
+            <p>{{ 'Items with you' | translate }}</p>
+        </a></li>
+    </ul>
+</section><!-- / page-content -->
+

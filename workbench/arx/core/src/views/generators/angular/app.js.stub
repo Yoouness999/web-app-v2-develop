@@ -1,0 +1,19 @@
+'use strict';
+
+import angular from 'angular';
+import 'angular-ui-router';
+import ApiService from './../../shared/api/ApiService';
+import routes from './routes';
+import ManagerController from './ManagerController';
+import BoxItem from './ManagerDirective';
+import GplacesDirective from './../../shared/form/directives/GplacesDirective';
+import MomentDateFilter from './../../shared/utils/filters/MomentdateFilter';
+
+angular.module('manager', ['ui.router', 'pascalprecht.translate', '720kb.datepicker'])
+    .run(() => console.log('-> Manager!'))
+    .config(routes)
+    .config(['$translateProvider', function ($translateProvider) {
+        $translateProvider.translations(window.__app.lang, window.__app.labels);
+        $translateProvider.preferredLanguage(window.__app.lang);
+        $translateProvider.useSanitizeValueStrategy('escapeParameters');
+    }]);

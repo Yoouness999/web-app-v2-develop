@@ -1,0 +1,74 @@
+/* ======================================================
+*  Lists
+*  =====================================================*/
+
+.list-check, .list-arrow {
+    @extend .list-unstyled;
+    padding: 0 40px 5px;
+
+    > li {
+        position: relative;
+        margin: 0 0 5px 20px;
+        text-align: left;
+
+        &:before {
+            content: '';
+            background-position: center left;
+            background-repeat: no-repeat;
+            height: 20px;
+            left: -29px;
+            margin-bottom: 10px;
+            position: absolute;
+            width: 20px;
+        }
+    }
+}
+
+.list-check {
+    > li {
+        &:before {
+            background-image: url(../img/icon-check.png);
+        }
+    }
+}
+
+.list-arrow {
+    > li {
+        &:before {
+            background-image: url(../img/icon-arrow.png);
+        }
+    }
+}
+
+.list-social {
+    @extend .list-inline;
+    @extend .text-center;
+    margin: 10px auto 0;
+
+    > li {
+        padding-left: 4px;
+        padding-right: 4px;
+        margin-bottom: 10px;
+
+        > a {
+            color: #fff;
+            background-color: $btn-primary-bg;
+            border-radius: 50%;
+            display: block;
+            height: 32px;
+            line-height: 32px;
+            width: 32px;
+
+            &:hover {
+                background-color: darken($btn-primary-bg, 10%);
+            }
+        }
+    }
+
+    @media (max-width: $screen-xs-max) {}
+    @media (min-width: $screen-sm-min) {
+        width: 135px;
+    }
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}

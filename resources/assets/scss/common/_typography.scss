@@ -1,0 +1,184 @@
+/* ======================================================
+*  Typography
+*  =====================================================*/
+
+@include font-face('Klavika', '../fonts/klavika-regular-webfont');
+@include font-face('MuseoSerif', '../fonts/museo700-regular-webfont');
+
+@font-face {
+	font-family: 'Museo';
+	src: url('../fonts/MuseoSans-300.otf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Museo';
+	src: url('../fonts/MuseoSans-300Italic.otf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Museo';
+	src: url('../fonts/MuseoSans_500.otf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Museo';
+	src: url('../fonts/MuseoSans_500Italic.otf') format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+
+.font-klavika {
+    font-family: 'Klavika', sans-serif;
+}
+
+.font-museo {
+    font-family: 'Museo', sans-serif;
+	font-weight: 300;
+}
+
+.font-museo-bold {
+    font-family: 'Museo', sans-serif;
+	font-weight: 500;
+}
+
+.font-museo-serif {
+    font-family: 'MuseoSerif', sans-serif;
+}
+
+// General
+body {
+	@extend .font-museo;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+// Titles
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-feature-settings: "liga";
+}
+
+h1, .h1 {
+    @extend .font-klavika;
+    font-size: 55px;
+}
+
+h2, .h2 {
+    @extend .font-museo;
+    font-size: 30px;
+    margin-bottom: 20px;
+
+    @media (max-width: $screen-xs-max) {}
+    @media (min-width: $screen-sm-min) {
+        font-size: 36px;
+    }
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}
+
+h3, .h3 {
+    @extend .font-museo;
+    font-size: 30px;
+    margin-bottom: 25px;
+
+    @media (max-width: $screen-xs-max) {}
+    @media (min-width: $screen-sm-min) {
+        font-size: 36px;
+    }
+    @media (min-width: $screen-md-min) {}
+    @media (min-width: $screen-lg-min) {}
+}
+
+h4, .h4 {
+    @extend .font-museo-bold;
+    font-size: 24px;
+    margin-top: 0;
+}
+
+h5, .h5 {
+    @extend .font-museo;
+    font-size: 24px;
+}
+
+h6, .h6 {}
+
+// Paragraphs
+p {}
+
+.p-sm {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.p-lg {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+a {
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        outline: none;
+    }
+}
+
+// Separator
+hr {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+// Lists
+ul {
+    li {}
+}
+
+ol {
+    li {}
+}
+
+dl {
+    dt {}
+    dd {}
+}
+
+// Inline elements
+abbr {}
+
+address {}
+
+b {}
+
+cite {}
+
+code {}
+
+del {}
+
+dfn {}
+
+em {}
+
+ins {}
+
+mark {}
+
+pre {}
+
+strong {}
+
+small {}
+
+sup {}
+
+sub {}

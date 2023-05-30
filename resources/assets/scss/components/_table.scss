@@ -1,0 +1,26 @@
+/* ======================================================
+*  Tables
+*  =====================================================*/
+
+.table {
+	> tbody {
+		> tr {
+			> td {
+				border-top: 0;
+			}
+		}
+	}
+}
+
+.table.table-lined {
+	> tbody {
+		> tr {
+			> td {
+				border-top: 1px solid #ddd;
+				&:last-child {
+					text-align: right;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,275 @@
+////
+/// Loaders
+/// @group Blok
+/// @todo http://semantic-ui.com/elements/divider.html#vertical-divider
+////
+
+$loader-line-width: .2em !default;
+$loader-fill-color: $gray-lighter !default;
+$loading-overlay: $body-bg !default;
+$loader-radius-base: 500rem !default;
+$loader-shape-color: $gray-light !default;
+$loader-size-xs: 1.2857em !default;
+$loader-size-sm: 1.9285em !default;
+$loader-size-md: 2.5713em !default;
+$loader-size-lg: 3.2141em !default;
+
+
+@mixin loader-size($size: $loader-size-sm) {
+    font-size: ($size * 0.5);
+    padding-top: $size * 1.1;
+
+    &:after,
+    &:before {
+        margin: 0 0 0 (-($size * 0.5));
+        height: $size;
+        width: $size;
+    }
+
+    &.loader--inline {
+        padding-left: $size;
+    }
+}
+
+.loader {
+    @include center();
+    @include loader-size();
+    cursor: default;
+    display: block;
+    font-size: 1em;
+    margin: 0;
+    overflow: visible;
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    visibility: hidden;
+    width: auto;
+    z-index: 1000;
+
+    &:after, &:before {
+        border-radius: $loader-radius-base;
+        content: '';
+        left: 50%;
+        position: absolute;
+        top: 0;
+    }
+
+    &:before {
+        border: $loader-line-width solid $loader-fill-color;
+    }
+
+    &:after {
+        @include spin();
+        border-color: $loader-shape-color transparent transparent;
+        border-style: solid;
+        border-width: $loader-line-width;
+        box-shadow: 0 0 0 1px transparent;
+    }
+
+    &.active {
+        visibility: visible;
+    }
+}
+
+/// @example
+/// <div class="loader loader--spinner">
+///     <div class="loader__spinner_dot--first"></div>
+///     <div class="loader__spinner_dot--second"></div>
+///     <div class="loader__spinner_dot--third"></div>
+/// </div>
+/*.loader--spinner {
+    &:after, &:before {
+        display: none;
+    }
+
+    .loader__spinner_dot {
+        background-color: $loader-shape-color;
+        border-radius: 50%;
+        display: inline-block;
+        height: 1em;
+        margin-left: 1em;
+        @include spin-pulse();
+        vertical-align: top;
+        width: 1em;
+    }
+
+    .loader__spinner_dot--first {}
+    .loader__spinner_dot--second {
+        @include animation-delay(.2s);
+    }
+    .loader__spinner_dot--third {
+        @include animation-delay(.4s);
+    }
+}*/
+
+/// @example
+/// <div class="loader loader--cube">
+///     <div class="loader__face loader__face--front">CTR</div>
+///     <div class="loader__face loader__face--back">Télé</div>
+///     <div class="loader__face loader__face--left">Ciné</div>
+///     <div class="loader__face loader__face--right">News</div>
+///     <div class="loader__face loader__face--bottom">People</div>
+///     <div class="loader__face loader__face--top">Série</div>
+/// </div>
+/*.loader--cube {
+    font-size: 20px;
+    height: 80px;
+    line-height: 80px;
+    margin: -40px 0 0 -40px;
+    padding-top: 0;
+    perspective: 9999px;
+    text-align: center;
+    @include transform-style(preserve-3d);
+    @include transition(transform 0.5s 0.1s);
+    width: 80px;
+
+    &:after, &:before {
+        display: none;
+    }
+
+    .loader__face {
+        background: white;
+        box-shadow: inset 0 0 0 1px #ddd, 0 0 1px 1px #ddd;
+        height: inherit;
+        opacity: 1;
+        position: absolute;
+        width: inherit;
+    }
+
+    .loader__face--front {
+        background-color: $brand-danger;
+        box-shadow: inset 0 0 0 1px $brand-danger, 0 0 1px 1px $brand-danger;
+        color: #fff !important;
+        font-family: $font-family-sans-serif-bold;
+        font-size: 30px;
+        @include transform(translate3d(0, 0, 40px));
+    }
+
+    .loader__face--back {
+        @include transform(rotateY(180deg) translate3d(0, 0, 40px));
+    }
+
+    .loader__face--left {
+        @include transform(rotateY(-90deg) translate3d(0, 0, 40px));
+    }
+
+    .loader__face--right,
+    .loader__face--top,
+    .loader__face--bottom {
+        font-family: $font-family-serif;
+    }
+
+    .loader__face--right {
+        @include transform(rotateY(90deg) translate3d(0, 0, 40px));
+    }
+
+    .loader__face--top {
+        @include transform(rotateX(90deg) translate3d(0, 0, 40px));
+    }
+
+    .loader__face--bottom {
+        @include transform(rotateX(-90deg) translate3d(0, 0, 40px));
+    }
+}*/
+
+
+/*.loading {
+    .loader--cube {
+        @include dice();
+    }
+}*/
+
+
+.loader--xs {
+    @include loader-size($loader-size-xs);
+}
+
+.loader--md {
+    @include loader-size($loader-size-md);
+}
+
+.loader--lg {
+    @include loader-size($loader-size-lg);
+}
+
+.loader--inline {
+    display: inline-block;
+    left: 0;
+    position: relative;
+    top: 0;
+    transform: none;
+}
+
+
+.loading {
+    cursor: default;
+    display: block;
+    overflow: hidden;
+    pointer-events: none;
+    position: relative;
+
+    &.loading--overlay::before {
+        opacity: .6;
+        visibility: visible;
+    }
+
+    /*&.loading--completed {
+        $check-height: 10px;
+        $check-width: 15px;
+        $check-left: 10px;
+        $check-thickness: 3px;
+        $check-color: $brand-success;
+
+        .loader {
+            &:before {
+                display: none;
+            }
+
+            &:after {
+                opacity: 1;
+                height: $check-height;
+                width: $check-width;
+                transform-origin: left top;
+                border-right: $check-thickness solid $check-color;
+                border-top: $check-thickness solid $check-color;
+                content: '';
+                left: $check-left;
+                top: $check-height;
+                position: absolute;
+
+                // draw animation
+                animation-duration: 800ms;
+                animation-timing-function: ease;
+                animation-name: checkmark;
+                transform: scaleX(-1) rotate(135deg);
+            }
+        }
+    }*/
+
+    .loader {
+        visibility: visible;
+    }
+}
+
+// @todo Move `.loading--overlay` to a component called `.overlay`
+.loading--overlay {
+    // overlay
+    &::before {
+        background: $loading-overlay;
+        display: block;
+        content: '';
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        @include transition(visiblity 0s linear .5s, opacity .3s ease-in-out);
+        visibility: hidden;
+        width: 100%;
+        z-index: 100;
+    }
+}
+
+.form-group.loading {
+    .loader {}
+}

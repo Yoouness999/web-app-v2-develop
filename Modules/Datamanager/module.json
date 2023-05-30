@@ -1,0 +1,15 @@
+{
+    "name": "Datamanager",
+    "alias": "datamanager",
+    "description": "Datamanager module for Arxmin",
+    "keywords": ["datamanager", "cms"],
+    "active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\Datamanager\\Providers\\DatamanagerServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

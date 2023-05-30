@@ -1,0 +1,61 @@
+/*!
+ * Angular Datepicker v2.1.23
+ *
+ * Released by 720kb.net under the MIT license
+ * www.opensource.org/licenses/MIT
+ *
+ * 2017-06-28
+ */
+
+/*!
+ * Bootstrap v3.4.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under the MIT license
+ */
+
+/*!
+ * Datepicker for Bootstrap v1.9.0 (https://github.com/uxsolutions/bootstrap-datepicker)
+ *
+ * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ */
+
+/*!
+ * angular-translate - v2.19.0 - 2021-09-02
+ * 
+ * Copyright (c) 2021 The angular-translate team, Pascal Precht; Licensed MIT
+ */
+
+/*!
+ * clipboard.js v2.0.10
+ * https://clipboardjs.com/
+ *
+ * Licensed MIT © Zeno Rocha
+ */
+
+/*!
+ * jQuery Cookie Plugin v1.4.1
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2013 Klaus Hartl
+ * Released under the MIT license
+ */
+
+/*!
+ * jQuery Validation Plugin v1.19.3
+ *
+ * https://jqueryvalidation.org/
+ *
+ * Copyright (c) 2021 Jörn Zaefferer
+ * Released under the MIT license
+ */
+
+/**
+ * State-based routing for AngularJS
+ * @version v0.2.15
+ * @link http://angular-ui.github.com/
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+
+//! moment.js
+
+//! moment.js locale configuration

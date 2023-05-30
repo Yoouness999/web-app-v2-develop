@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  boxify-db:
+    image: mysql
+    #command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db_files:/var/lib/mysql:delegated
+      - ./volumes/db/logs:/var/log/mysql:delegated
+      - ./dbimport:/opt
+    ports:
+      - 3306:3306
+    networks:
+      - boxify
+    env_file:
+      - ./docker/.env # environment-specific
+
+  php:
+    build:
+      context: ./docker/php
+      args:
+        TIMEZONE: ${TIMEZONE}
+    volumes:
+      - ./:/usr/share/nginx/html/
+    networks:
+      - boxify
+    env_file:
+      - ./docker/.env # environment-specific
+
+  nginx:
+    build:
+      context: ./docker/nginx
+    volumes:
+      - ./:/usr/share/nginx/html/
+    ports:
+      - 80:80
+    networks:
+      - boxify
+    env_file:
+      - ./docker/.env # environment-specific
+    links:
+      - boxify-db:mysql
+      - php
+    depends_on:
+      - php
+
+volumes:
+  db_files:
+    driver: local
+
+networks:
+  boxify:

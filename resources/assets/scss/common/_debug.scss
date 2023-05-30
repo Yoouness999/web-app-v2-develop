@@ -1,0 +1,32 @@
+/* ======================================================
+*  CSS debugging helpers
+*  =====================================================*/
+
+// outline selected element
+.d {
+    @include d();
+}
+
+// outline all elements inside
+.dd {
+    @include pesticide();
+}
+
+// trace media queries / highlight broken html
+body.debug {
+    @include trace('XS', 'SM', 'MD', 'LG');
+    @include errors();
+
+    &:before {
+        bottom: 5px;
+        position: fixed;
+        top: auto;
+        z-index: 9000;
+    }
+
+    * {
+        &:focus, &:hover {
+            outline: 1px solid red;
+        }
+    }
+}

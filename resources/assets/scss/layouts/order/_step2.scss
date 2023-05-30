@@ -1,0 +1,80 @@
+/* Body */
+
+.tpl-order-services {
+    .section-services {
+        .container {
+            position: relative;
+        }
+
+        @media screen and (max-width: $screen-xs-max) {
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+    }
+
+    h1 {
+        margin: 0 0 63px;
+        color: $text-color;
+        font-size: 36px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .order-services-form {
+        @media (max-width: $screen-xs-max) {
+            button[type="submit"] {
+                display: block;
+                width: 100%;
+            }
+        }
+        @media (min-width: $screen-sm-min) {}
+        @media (min-width: $screen-md-min) {}
+        @media (min-width: $screen-lg-min) {}
+    }
+
+    .economy {
+        display: table;
+        width: 780px;
+        margin: 40px 0;
+        color: $text-color;
+        font-size: 22px;
+        font-weight: 500;
+        text-align: left;
+
+        p {
+            display: table-cell;
+            vertical-align: top;
+            margin: 0;
+
+            &:last-child {
+                padding-left: 150px;
+                color: $brand-primary;
+                font-size: 36px;
+                font-weight: 300;
+                text-align: right;
+
+                @media screen and (max-width: $screen-xs-max) {
+                    padding-left: 30px;
+                }
+            }
+        }
+
+        @media screen and (max-width: $screen-xs-max) {
+            width: 100%;
+
+            p {
+                display: block;
+            }
+        }
+    }
+
+    .continue {
+        display: none;
+        margin: 40px 0 0;
+        text-align: left;
+
+        &.active {
+            display: block;
+        }
+    }
+}

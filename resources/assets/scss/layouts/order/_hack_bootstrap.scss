@@ -1,0 +1,16 @@
+.align-middle, .align-top, .align-bottom {
+	display: inline-block;
+	float: none;
+}
+
+.align-middle {
+	vertical-align: middle;
+}
+
+.align-top {
+	vertical-align: top;
+}
+
+.align-bottom {
+	vertical-align: bottom;
+}

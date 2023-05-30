@@ -1,0 +1,61 @@
+# Mac OS X
+
+.DS_Store
+.AppleDouble
+.LSOverride
+.tmb
+.quarantine
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+Icon
+
+
+
+# Windows
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+
+
+# Editors
+
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-project
+*.sublime-workspace
+sftp-config.json
+.idea/
+
+
+# Project specific
+/_src
+/_backup
+/vendor
+/public/storage
+node_modules
+bower_components
+npm-debug.log
+/.env
+.vagrant
+!.gitignore
+
+public/robots.txt
+public/undeleted.json
+
+storage/app/modules/modules.used
+/dbimport
